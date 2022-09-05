@@ -16,7 +16,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                 @auth
-                        <a class="text-decoration-none p-2 text-danger" href="{{route('answer.questions')}}">Answer Questions</a>
+                        <a class="text-decoration-none p-2 text-danger" href="{{route('test.question')}}">Test Yourself</a>
                 @else
                 @endauth        
                     </ul>

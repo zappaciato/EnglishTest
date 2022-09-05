@@ -14,6 +14,10 @@
                     <div class="col-sm border p-5 d-flex flex-column align-items-center justify-content-center" >
                         <h5 style="font-size: 0.9rem">Users registered:</h5>
                         <h3 style="font-size: 1.8rem">0</h3>
+                        @foreach ($questions as $question)
+                            <h1>{{$question->instruction}}</h1>
+                        @endforeach
+                        
                     </div>
                     <div class="col-sm border p-5 justify-content-center d-flex flex-column align-items-center" >    
                         <h5 style="font-size: 0.8rem">Number of questions:</h5>
