@@ -8,7 +8,7 @@
       {{-- Here goes auth() for admin user or any other user --}}
                 <div class="container-fluid card-header d-flex justify-content-between"> 
                     <h3>{{ __('User Dashboard') }}</h3>
-                    <h3><a class="text-decoration-none p-2 text-danger" href=" {{route('add.question')}}">Answer more Questions</a></h3>
+                    <h3><a class="text-decoration-none p-2 text-danger" href=" {{route('test.question')}}">Test yourself</a></h3>
                 </div>
                 <h3>Hi User, here are your stats:</h3>
                 <div class="row justify-content-evenly p-5">

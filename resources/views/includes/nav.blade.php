@@ -1,13 +1,12 @@
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                @auth
-                    <a class="navbar-brand" href="{{ route('admin.dashboard') }}">
-                @else
-                    <a class="navbar-brand" href="{{ route('home') }}">
-                @endauth
                 
-                    {{ config('app.name', 'EnglishTest') }}
-                </a>
+                @can('manage-page')
+                    <a class="navbar-brand" href="{{ route('admin.dashboard') }}">{{ config('app.name', 'EnglishTest') }}</a>
+                @else
+                    <a class="navbar-brand" href="{{ route('user.dashboard') }}">{{ config('app.name', 'EnglishTest') }}</a>
+                @endcan
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -15,10 +14,16 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
+                
+
+                @can('manage-page')
+                        <a class="text-decoration-none p-2 text-danger" href="{{route('test.question')}}">Test Yourself Admin</a>
+                @else
                 @auth
                         <a class="text-decoration-none p-2 text-danger" href="{{route('test.question')}}">Test Yourself</a>
-                @else
-                @endauth        
+                @endauth
+                @endcan
+                        
                     </ul>
                 
                         <!-- Right Side Of Navbar -->
