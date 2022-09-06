@@ -4,7 +4,10 @@
                 @can('manage-page')
                     <a class="navbar-brand" href="{{ route('admin.dashboard') }}">{{ config('app.name', 'EnglishTest') }}</a>
                 @else
+                @auth
                     <a class="navbar-brand" href="{{ route('user.dashboard') }}">{{ config('app.name', 'EnglishTest') }}</a>
+                @endauth
+                    <a class="navbar-brand" href="{{ route('home') }}">{{ config('app.name', 'EnglishTest') }}</a>
                 @endcan
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
