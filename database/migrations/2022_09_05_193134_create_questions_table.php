@@ -24,8 +24,8 @@ return new class extends Migration
             $table->string('answer_c');
             $table->string('answer_d');
             $table->string('correct');
-            $table->boolean('tenses') ;
-            $table->boolean('vocabulary') ;
+            // $table->boolean('tenses');
+            // $table->boolean('vocabulary');
             $table->timestamps();
         });
     }

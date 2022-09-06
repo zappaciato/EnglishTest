@@ -42,8 +42,8 @@ class AdminController extends Controller
             'answer_c' => ['required'],
             'answer_d' => ['required'],
             'correct' => ['required'],
-            'tenses' => ['true'],
-            'vocabulary' => ['false']
+            // 'tenses' => ['true'],
+            // 'vocabulary' => ['false']
         ])->validate();
     }
 
@@ -73,8 +73,8 @@ class AdminController extends Controller
             'answer_c' => $data['answer_c'],
             'answer_d' => $data['answer_d'],
             'correct' => $data['correct'],
-            'tenses' => $data['tenses'],
-            'vocabulary' => $data['vocabulary'],
+            // 'tenses' => $data['tenses'],
+            // 'vocabulary' => $data['vocabulary'],
         ]);
 
         return $data;
