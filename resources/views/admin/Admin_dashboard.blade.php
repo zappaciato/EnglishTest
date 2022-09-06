@@ -13,11 +13,16 @@
                 <div class="row justify-content-evenly p-5">
                     <div class="col-sm border p-5 d-flex flex-column align-items-center justify-content-center" >
                         <h5 style="font-size: 0.9rem">Users registered:</h5>
-                        <h3 style="font-size: 1.8rem">0</h3>
+                        <h3 style="font-size: 1.8rem">{{count($users)}}</h3>
+
+                        @foreach ($questions as $question)
+                            <h1>{{$question->instruction}}</h1>
+                        @endforeach
+                        
                     </div>
                     <div class="col-sm border p-5 justify-content-center d-flex flex-column align-items-center" >    
                         <h5 style="font-size: 0.8rem">Number of questions:</h5>
-                        <h3 style="font-size: 1.8rem">0</h3>
+                        <h3 style="font-size: 1.8rem">{{count($questions)}}</h3>
                     </div>
                     <div class="col-sm border p-5 justify-content-center d-flex flex-column align-items-center" >
                         <h5 style="font-size: 0.8rem">Questions answered:</h5>
