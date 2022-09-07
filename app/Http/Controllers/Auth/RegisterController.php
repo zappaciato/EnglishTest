@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
@@ -64,7 +65,7 @@ class RegisterController extends Controller
      * @return \App\Models\User
      */
     protected function create(array $data)
-    {   
+    {
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -79,9 +80,8 @@ class RegisterController extends Controller
      * @param  mixed  $user
      * @return mixed
      */
-    protected function registered(Request $request)
+    protected function registered(Request $request, $user)
     {
-        Log::info($request);
-        session()->flash('message', 'Your question has been added!'); 
+        session()->flash('message', "Hi {$user->name}, you have been registered and logged in!");
     }
 }

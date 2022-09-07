@@ -79,4 +79,18 @@ class AdminController extends Controller
 
         return $data;
     }
+
+
+    // /**
+    //  * The question has been added.
+    //  *
+    //  * @param  \Illuminate\Http\Request  $request
+    //  * @param  mixed  $user
+    //  * @return mixed
+    //  */
+    // protected function registered(Request $request)
+    // {
+    //     Log::info($request);
+    //     session()->flash('message', 'Your question has been added!');
+    // }
 }

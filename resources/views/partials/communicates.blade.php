@@ -10,14 +10,14 @@
 @if(session('message'))
 <div class="message">{{session('message')}}</div>
 @endif
-@if(session('verified'))
+
+{{-- @if(session('verified'))
 <div class="message">Your email has been verified!</div>
 @endif
 @if(session('resend'))
 <div class="message">Verification link has been resent!</div>
-@endif
+@endif --}}
 
-{{-- to ponizej to moje testowalem inny message po zakonczeniu edycji posta; --}}
-@if(session('edit'))
-<div class="message">You have edited and saved selected post.</div>
-@endif
+{{-- @php
+dd(session());    
+@endphp --}}
