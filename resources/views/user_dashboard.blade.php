@@ -10,11 +10,11 @@
                     <h3>{{ __('User Dashboard') }}</h3>
                     <h3><a class="text-decoration-none p-2 text-danger" href=" {{route('test.question')}}">Test yourself</a></h3>
                 </div>
-                <h3>Hi User, here are your stats:</h3>
+                <h3>Hi {{ Auth::user()->name }}! Here are your stats:</h3>
                 <div class="row justify-content-evenly p-5">
                     <div class="col-sm border p-5 d-flex flex-column align-items-center" >    
                         <h5>Number of questions:</h5>
-                        <h3>0</h3>
+                        <h3>{{count($questions)}}</h3>
                     </div>
                     <div class="col-sm border p-5 d-flex flex-column align-items-center" >
                         <h5>Questions answered:</h5>
