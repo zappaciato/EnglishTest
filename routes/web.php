@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -22,7 +23,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/user-dashboard', function () { return view('User_dashboard');})->name('user.dashboard');
+Route::get('/user-dashboard', [UserController::class, 'index'])->name('user.dashboard');
 Route::get('/test-question', [QuestionController::class, 'randomQuestion'])->name('test.question');
 
 Route::get('/admin-dashboard', [AdminController::class, 'index'])->name('admin.dashboard');

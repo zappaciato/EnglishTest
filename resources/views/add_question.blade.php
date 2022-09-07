@@ -38,10 +38,10 @@
             </div>
             <div class="container d-flex justify-content-start flex-row align-items-center mt-5">
                 <label class="py-2 m-5" for="formGroupExampleInput">Correct Answer:</label>
-                <label class="m-3" for="">A<input type="radio" name="correct"></label>
-                <label class="m-3" for="">B<input type="radio" name="correct"></label>
-                <label class="m-3" for="">C<input type="radio" name="correct"></label>
-                <label class="m-3" for="">D<input type="radio" name="correct"></label>
+                <label class="m-3" for="">A<input type="radio" name="correct" value="a"></label>
+                <label class="m-3" for="">B<input type="radio" name="correct" value="b"></label>
+                <label class="m-3" for="">C<input type="radio" name="correct" value="c"></label>
+                <label class="m-3" for="">D<input type="radio" name="correct" value="d"></label>
             </div>
         </div>
     

@@ -11,11 +11,12 @@ use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    //     $this->middleware('can:manage-page');
-    // }
+    public function __construct()
+    {
+        Log::info("I am in the construck in Admin controller.");
+        $this->middleware('auth');
+        $this->middleware('can:manage-page');
+    }
 
     public function index()
     {
@@ -36,12 +37,12 @@ class AdminController extends Controller
         Log::info('I am in validator queston');
         return Validator::make($data, [
             'instruction' => ['required', 'string', 'max:255'],
-            'content' => ['required'],
+            'content' => ['required', 'unique:questions'],
             'answer_a' => ['required'],
             'answer_b' => ['required'],
             'answer_c' => ['required'],
             'answer_d' => ['required'],
-            'correct' => ['required'],
+            'correct' => ['required', 'alpha'],
             // 'tenses' => ['true'],
             // 'vocabulary' => ['false']
         ])->validate();
@@ -76,8 +77,8 @@ class AdminController extends Controller
             // 'tenses' => $data['tenses'],
             // 'vocabulary' => $data['vocabulary'],
         ]);
-
-        return $data;
+        session()->flash('message', 'Your question has been added!');
+        return redirect(route('admin.dashboard'));
     }
 
 

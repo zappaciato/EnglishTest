@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Log;
 
 class QuestionController extends Controller
 {
+    
     #show all questions
     public function index()
     {
