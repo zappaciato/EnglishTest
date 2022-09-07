@@ -1,11 +1,17 @@
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 
+                
+                @auth
                 @can('manage-page')
                     <a class="navbar-brand" href="{{ route('admin.dashboard') }}">{{ config('app.name', 'EnglishTest') }}</a>
                 @else
                     <a class="navbar-brand" href="{{ route('user.dashboard') }}">{{ config('app.name', 'EnglishTest') }}</a>
                 @endcan
+                @endauth
+                @guest
+                <a class="navbar-brand" href="{{ route('home') }}">{{ config('app.name', 'EnglishTest') }}</a>
+                @endguest
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>

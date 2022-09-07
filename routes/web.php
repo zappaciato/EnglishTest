@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\QuestionController;
-use App\Models\Question;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -17,27 +17,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', function () {return view('welcome');});
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/user-dashboard', 
-function () {
-    return view('User_dashboard');
-}
-)->name('user.dashboard');
-
-Route::get('/add-question', function () {
-    return view('add_question');
-})->name('add.question');
-
+Route::get('/user-dashboard', [UserController::class, 'index'])->name('user.dashboard');
 Route::get('/test-question', [QuestionController::class, 'randomQuestion'])->name('test.question');
-Route::get('/admin-dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 
-// Route::get('/answer-questions', function() {
-//     return view('welcome');
-// })->name('answer.questions');
+Route::get('/admin-dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+Route::get('/add-question', [AdminController::class, 'create'])->name('add.question');
+Route::post('/add-question', [AdminController::class, 'store']);
+
+// Route::get('/admin/question/{id}', [AdminController::class, 'edit'])->name('admin.post.edit');
+// Route::put('/admin/question/{id}', [AdminController::class, 'update']);
