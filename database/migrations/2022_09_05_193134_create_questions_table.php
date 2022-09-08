@@ -17,15 +17,23 @@ return new class extends Migration
         
         Schema::create('questions', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('type');
             $table->longText('instruction') ;
-            $table->longText('content') ;
-            $table->string('answer_a');
-            $table->string('answer_b');
-            $table->string('answer_c');
-            $table->string('answer_d');
-            $table->char('correct', 1);
-            // $table->boolean('tenses');
-            // $table->boolean('vocabulary');
+            $table->longText('content')->unique();
+            $table->string('listening')->nullable();
+            $table->string('answer_a')->nullable();
+            $table->string('answer_b')->nullable();
+            $table->string('answer_c')->nullable();
+            $table->string('answer_d')->nullable();
+            $table->boolean('answer_true')->nullable();
+            $table->char('correct', 1)->nullable();
+// categories
+            $table->boolean('grammar')->nullable();
+            $table->boolean('tenses')->nullable();
+            $table->boolean('present_simple')->nullable();
+            $table->boolean('vocabulary')->nullable();
+            $table->boolean('business')->nullable();
+
             $table->timestamps();
         });
     }

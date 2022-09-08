@@ -2,56 +2,17 @@
 
 @section('content')
     
-    <form method="POST" action="{{ route('add.question') }}">
-        @csrf
         <div class="d-flex flex-column py-5 container align-items-center" >
-            <div style="width: 50vw; margin-bottom: 30px;" class="d-flex justify-content-start align-items-start"><h2>Add a question</h2></div>
-        
-        {{-- Question and instructions --}}
-        <div style="width:45vw; height:auto" class="form-group d-flex flex-column">
+            <div style="width: 50vw; margin-bottom: 30px;" class="d-flex justify-content-start flex-column align-items-start">
 
-            <label for="">Question instruction</label>
-            <div class="input-group">
-                <input type="text" class="form-control border border-secondary"  name="instruction" placeholder="Question instruction..." value="{{ old('instruction') }}">
-            </div>
+                <h2>Choose a question type:</h2>
+                <a href="{{route('question.multi')}}" class="btn btn-primary mb-2" style="width: 10rem;">Multiple question</a>
+                <a href="{{route('question.truefalse')}}" class="btn btn-success mb-2" style="width: 10rem;">True or False</a>
+                <a href="{{route('question.reading')}}" class="btn btn-warning mb-2" style="width: 10rem;">Reading</a>
+                <a href="{{route('question.listening')}}" class="btn btn-info mb-2" style="width: 10rem;">Listening</a>
 
-            <label for="">Question content</label>
-            <div class="input-group">
-                <input type="text" class="form-control border border-secondary" name="content" placeholder="Question content..." value="{{ old('content') }}">
-            </div>
+                <a href="{{route('admin.dashboard')}}" class="btn btn-secondary mb-2" style="width: 10rem; margin-top:30px;">Go back to dashboard</a>
 
-            {{-- Answers --}}
-            <div class="row mt-5">
-                <label for="">Answers</label>
-                <div class="col">
-                    <span>A</span><input type="text" class="form-control border border-secondary" name="answer_a" value="{{old('answer_a')}}" placeholder="Answer A">
-                </div>
-                <div class="col">
-                    <span>B</span><input type="text" class="form-control border border-secondary" name="answer_b" value="{{old('answer_b')}}" placeholder="Answer B">
-                </div>
-                <div class="col">
-                    <span>C</span><input type="text" class="form-control border border-secondary" name="answer_c" value="{{old('answer_c')}}" placeholder="Answer C">
-                </div>
-                <div class="col">
-                    <span>D</span><input type="text" class="form-control border border-secondary" name="answer_d" value="{{old('answer_d')}}" placeholder="Answer D">
-                </div>
-            </div>
-            <div class="container d-flex justify-content-start flex-row align-items-center mt-5">
-                <label class="py-2 m-5" for="formGroupExampleInput">Correct Answer:</label>
-                <label class="m-3" for="">A<input type="radio" name="correct" value="a"></label>
-                <label class="m-3" for="">B<input type="radio" name="correct" value="b"></label>
-                <label class="m-3" for="">C<input type="radio" name="correct" value="c"></label>
-                <label class="m-3" for="">D<input type="radio" name="correct" value="d"></label>
-            </div>
         </div>
-    
-        {{-- Questions' Categories --}}
-        {{-- @include('includes.categories') --}}
 
-            <div class="d-flex flex-row py-3 justify-content-end align-items-center d-md-inline-flex container">
-                <input class="btn btn-secondary" type="submit" value="Submit">
-                <input class="ms-3 btn btn-danger" type="cancel" value="Cancel">
-            </div>
-        </div>
-    </form>
 @endsection
