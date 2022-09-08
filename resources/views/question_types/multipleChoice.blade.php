@@ -4,9 +4,9 @@
     
     <form method="POST" action="{{ route('question.multi') }}">
         @csrf
-        {{-- question type hidden input --}}
         
-        <input type="hidden" value="multi-choice" name="multi-choice">
+        {{-- question type hidden input --}}
+        <input type="hidden" value="multi-choice" name="type" id="type">
 
         <div class="d-flex flex-column py-5 container align-items-center" >
             <div style="width: 50vw; margin-bottom: 30px;" class="d-flex justify-content-start align-items-start"><h2>Add a multiple choice question</h2></div>
@@ -58,4 +58,7 @@
             </div>
         </div>
     </form>
+    @php
+        dd($errors);
+    @endphp
 @endsection

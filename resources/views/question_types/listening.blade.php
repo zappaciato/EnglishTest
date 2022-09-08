@@ -6,7 +6,7 @@
         @csrf
 
         {{-- question type hidden input --}}
-        <input type="hidden" value="listening" name="listening">
+        <input type="hidden" value="listening" name="type" id="type">
 
         <div class="d-flex flex-column py-5 container align-items-center" >
             <div style="width: 50vw; margin-bottom: 30px;" class="d-flex justify-content-start align-items-start"><h2>Add a listening question</h2></div>

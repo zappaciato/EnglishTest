@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Question;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
@@ -39,7 +40,8 @@ class CreateQuestionController extends Controller
     protected function validator(array $data)
     {
         Log::info('I am in validator queston');
-        return Validator::make($data, [
+        Log::debug($data);
+        $validated =  Validator::make($data, [
             'type' => ['required', 'in:multi-choice,reading,listening,trueFalse'],
             'instruction' => ['required', 'string', 'max:255'],
             'content' => ['required', 'unique:questions'],
@@ -56,6 +58,15 @@ class CreateQuestionController extends Controller
             'vocabulary' => ['boolean'],
             'business' => ['boolean'],
         ])->validate();
+
+        $validated = Arr::add($validated, 'grammar', 0);
+        $validated = Arr::add($validated, 'tenses', 0);
+        $validated = Arr::add($validated, 'present_simple', 0);
+        $validated = Arr::add($validated, 'vocabulary', 0);
+        $validated = Arr::add($validated, 'business', 0);
+        Log::debug($validated);
+        return $validated;
+
     }
 
     /**
@@ -77,6 +88,7 @@ class CreateQuestionController extends Controller
         // return redirect(route('admin.admin_dashboard'));
 
         Question::create([
+            'type' => $data['type'],
             'instruction' => $data['instruction'],
             'content' => $data['content'],
             'answer_a' => $data['answer_a'],
@@ -84,9 +96,13 @@ class CreateQuestionController extends Controller
             'answer_c' => $data['answer_c'],
             'answer_d' => $data['answer_d'],
             'correct' => $data['correct'],
-            // 'tenses' => $data['tenses'],
-            // 'vocabulary' => $data['vocabulary'],
+            'tenses' => $data['tenses'] ? 1 : 0,
+            'grammar' => $data['grammar'] ? 1 : 0,
+            'present_simple' => $data['present_simple'] ? 1 : 0,
+            'vocabulary' => $data['vocabulary'] ? 1 : 0,
+            'business' => $data['business'] ? 1 : 0,
         ]);
+        Log::debug($data);
         session()->flash('message', 'Your question has been added!');
         return redirect(route('admin.dashboard'));
     }

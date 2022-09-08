@@ -9,16 +9,20 @@ use Illuminate\Support\Facades\Log;
 class Question extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
-            'instruction',
-            'content',
-            'answer_a',
-            'answer_b',
-            'answer_c',
-            'answer_d',
-            'correct',
-            'tenses',
-            'vocabulary'
+        'type',
+        'instruction',
+        'content',
+        'answer_a',
+        'answer_b',
+        'answer_c',
+        'answer_d',
+        'correct',
+        'grammar',
+        'tenses',
+        'present_simple',
+        'vocabulary',
+        'business'
     ];
 }
