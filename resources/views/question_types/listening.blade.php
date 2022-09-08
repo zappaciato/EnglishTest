@@ -2,7 +2,7 @@
 
 @section('content')
 
-<form method="POST" action="{{ route('question.listening') }}">
+<form method="POST" action="{{ route('question.listening') }}" enctype="multipart/form-data">
         @csrf
 
         {{-- question type hidden input --}}
@@ -25,7 +25,7 @@
             </div>
 
             <label for="myfile">Select a file:</label>
-            <input type="file" id="myfile" name="myfile"><br><br>
+            <input type="file" id="listening" name="listening"><br><br>
             {{-- Answers --}}
             <div class="row mt-5">
                 <label for="">Answers</label>

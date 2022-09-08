@@ -5,8 +5,9 @@
 <form method="POST" action="{{ route('question.truefalse') }}">
         @csrf
 
+
         {{-- question type hidden input --}}
-        <input type="hidden" value="trueFalse" name="trueFalse">
+        <input type="hidden" value="trueFalse" name="type" id="type">
 
         <div class="d-flex flex-column py-5 container align-items-center" >
             <div style="width: 50vw; margin-bottom: 30px;" class="d-flex justify-content-start align-items-start"><h2>Add a True or False question</h2></div>
@@ -28,8 +29,13 @@
             <div class="row">
                 <div class="container d-flex justify-content-start flex-row align-items-center">
                 <label class="py-2 m-5" for="formGroupExampleInput">Correct Answer:</label>
-                <label class="m-3" for="">True<input type="radio" name="correct" value="a"></label>
-                <label class="m-3" for="">False<input type="radio" name="correct" value="b"></label>
+                {{-- question answer hidden input --}}
+                <input type="hidden" value="1" name="answer_a" id="answer_a">
+                <input type="hidden" value="0" name="answer_b" id="answer_b">
+                <input type="hidden" value="0" name="answer_c" id="answer_c">
+                <input type="hidden" value="0" name="answer_d" id="answer_d">
+                <label class="m-3" for="answer_a">True<input type="radio" name="correct" value="answer_a" id="correct"></label>
+                <label class="m-3" for="answer_b">False<input type="radio" name="correct" value="answer_b" id="correct"></label>
                 
             </div>
             </div>

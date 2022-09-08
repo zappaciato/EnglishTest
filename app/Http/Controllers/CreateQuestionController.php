@@ -45,12 +45,12 @@ class CreateQuestionController extends Controller
             'type' => ['required', 'in:multi-choice,reading,listening,trueFalse'],
             'instruction' => ['required', 'string', 'max:255'],
             'content' => ['required', 'unique:questions'],
-            'listening' => ['string'],
+            'listening' => [''],
             'answer_a' => ['string'],
             'answer_b' => ['string'],
             'answer_c' => ['string'],
             'answer_d' => ['string'],
-            'correct' => ['required', 'alpha'],
+            'correct' => ['required'],
 
             'grammar' => ['boolean'],
             'tenses' => ['boolean'],
@@ -65,8 +65,8 @@ class CreateQuestionController extends Controller
         $validated = Arr::add($validated, 'vocabulary', 0);
         $validated = Arr::add($validated, 'business', 0);
         Log::debug($validated);
-        return $validated;
 
+        return $validated;
     }
 
     /**
@@ -87,10 +87,18 @@ class CreateQuestionController extends Controller
 
         // return redirect(route('admin.admin_dashboard'));
 
+        if (isset($data['listening'])) {
+            $path = $request->file('listening')->store('/public/listenings');
+            $data['listening'] = $path;
+        }
+
+        Log::debug($data['listening']);
+
         Question::create([
             'type' => $data['type'],
             'instruction' => $data['instruction'],
             'content' => $data['content'],
+            'listening' => $data['listening'],
             'answer_a' => $data['answer_a'],
             'answer_b' => $data['answer_b'],
             'answer_c' => $data['answer_c'],
@@ -102,22 +110,8 @@ class CreateQuestionController extends Controller
             'vocabulary' => $data['vocabulary'] ? 1 : 0,
             'business' => $data['business'] ? 1 : 0,
         ]);
-        Log::debug($data);
+
         session()->flash('message', 'Your question has been added!');
         return redirect(route('admin.dashboard'));
     }
-
-
-    // /**
-    //  * The question has been added.
-    //  *
-    //  * @param  \Illuminate\Http\Request  $request
-    //  * @param  mixed  $user
-    //  * @return mixed
-    //  */
-    // protected function registered(Request $request)
-    // {
-    //     Log::info($request);
-    //     session()->flash('message', 'Your question has been added!');
-    // }
 }

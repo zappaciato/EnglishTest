@@ -14,6 +14,7 @@ class Question extends Model
         'type',
         'instruction',
         'content',
+        'listening',
         'answer_a',
         'answer_b',
         'answer_c',

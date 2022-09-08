@@ -23,10 +23,9 @@ return new class extends Migration
             $table->string('listening')->nullable();
             $table->string('answer_a')->nullable();
             $table->string('answer_b')->nullable();
-            $table->string('answer_c')->nullable();
-            $table->string('answer_d')->nullable();
-            $table->boolean('answer_true')->nullable();
-            $table->char('correct', 1)->nullable();
+            $table->string('answer_c')->default('C');
+            $table->string('answer_d')->default('D');
+            $table->string('correct')->nullable();
             // categories
             $table->boolean('grammar')->default(0);
             $table->boolean('tenses')->default(0);
