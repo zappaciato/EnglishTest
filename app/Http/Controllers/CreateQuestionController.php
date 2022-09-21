@@ -90,26 +90,44 @@ class CreateQuestionController extends Controller
         if (isset($data['listening'])) {
             $path = $request->file('listening')->store('/public/listenings');
             $data['listening'] = $path;
+
+            Question::create([
+                'type' => $data['type'],
+                'instruction' => $data['instruction'],
+                'content' => $data['content'],
+                'listening' => $data['listening'],
+                'answer_a' => $data['answer_a'],
+                'answer_b' => $data['answer_b'],
+                'answer_c' => $data['answer_c'],
+                'answer_d' => $data['answer_d'],
+                'correct' => $data['correct'],
+                'tenses' => $data['tenses'] ? 1 : 0,
+                'grammar' => $data['grammar'] ? 1 : 0,
+                'present_simple' => $data['present_simple'] ? 1 : 0,
+                'vocabulary' => $data['vocabulary'] ? 1 : 0,
+                'business' => $data['business'] ? 1 : 0,
+            ]);
+        } else {
+            Question::create([
+                'type' => $data['type'],
+                'instruction' => $data['instruction'],
+                'content' => $data['content'],
+                'answer_a' => $data['answer_a'],
+                'answer_b' => $data['answer_b'],
+                'answer_c' => $data['answer_c'],
+                'answer_d' => $data['answer_d'],
+                'correct' => $data['correct'],
+                'tenses' => $data['tenses'] ? 1 : 0,
+                'grammar' => $data['grammar'] ? 1 : 0,
+                'present_simple' => $data['present_simple'] ? 1 : 0,
+                'vocabulary' => $data['vocabulary'] ? 1 : 0,
+                'business' => $data['business'] ? 1 : 0,
+            ]);
         }
 
-        Log::debug($data['listening']);
+        // Log::debug($data['listening']);
 
-        Question::create([
-            'type' => $data['type'],
-            'instruction' => $data['instruction'],
-            'content' => $data['content'],
-            'listening' => $data['listening'],
-            'answer_a' => $data['answer_a'],
-            'answer_b' => $data['answer_b'],
-            'answer_c' => $data['answer_c'],
-            'answer_d' => $data['answer_d'],
-            'correct' => $data['correct'],
-            'tenses' => $data['tenses'] ? 1 : 0,
-            'grammar' => $data['grammar'] ? 1 : 0,
-            'present_simple' => $data['present_simple'] ? 1 : 0,
-            'vocabulary' => $data['vocabulary'] ? 1 : 0,
-            'business' => $data['business'] ? 1 : 0,
-        ]);
+
 
         session()->flash('message', 'Your question has been added!');
         return redirect(route('admin.dashboard'));
