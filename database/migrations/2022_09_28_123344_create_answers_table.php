@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::create('answers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('question_id');
-            $table->string('answer_a')->default(0);
-            $table->string('answer_b')->default(0);
-            $table->string('answer_c')->default(0);
-            $table->string('answer_d')->default(0);
-
+            $table->string('answer_a');
+            $table->string('answer_b');
+            $table->string('answer_c')->nullable(); //I make the two below nullable for questions true false which dont require 4 naswers but only two. 
+            $table->string('answer_d')->nullable();
+            $table->string('correct');
             $table->timestamps();
         });
     }

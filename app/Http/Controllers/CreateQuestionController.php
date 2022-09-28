@@ -51,11 +51,11 @@ class CreateQuestionController extends Controller
             'listening' => [''],
 
             //answers validation
-            'answer_a' => ['boolean'],
-            'answer_b' => ['boolean'],
-            'answer_c' => ['boolean'],
-            'answer_d' => ['boolean'],
-            
+            'answer_a' => ['required'],
+            'answer_b' => ['required'],
+            'answer_c' => ['required'],
+            'answer_d' => ['required'],
+            'correct'  => ['required'],
             //categories validation
             'grammar' => ['boolean'],
             'tenses' => ['boolean'],
@@ -64,11 +64,11 @@ class CreateQuestionController extends Controller
             'business' => ['boolean'],
         ])->validate();
 
-        $validated = Arr::add($validated, 'grammar', 0);
-        $validated = Arr::add($validated, 'tenses', 0);
-        $validated = Arr::add($validated, 'present_simple', 0);
-        $validated = Arr::add($validated, 'vocabulary', 0);
-        $validated = Arr::add($validated, 'business', 0);
+        // $validated = Arr::add($validated, 'grammar', 0);
+        // $validated = Arr::add($validated, 'tenses', 0);
+        // $validated = Arr::add($validated, 'present_simple', 0);
+        // $validated = Arr::add($validated, 'vocabulary', 0);
+        // $validated = Arr::add($validated, 'business', 0);
         Log::info('Below is validated data: ');
         Log::debug($validated);
 
@@ -98,14 +98,21 @@ class CreateQuestionController extends Controller
             $data['listening'] = $path;
             Log::info('Adding Question to the db with listening;');
 
+            Question::create([
+                'type' => $data['type'],
+                'level' => $data['level'],
+                'instruction' => $data['instruction'],
+                'content' => $data['content'],
+                'listening' => $data['listening'],
+            ]);
+
             Answer::create([
-                
                 'answer_a' => $data['answer_a'],
                 'answer_b' => $data['answer_b'],
                 'answer_c' => $data['answer_c'],
                 'answer_d' => $data['answer_d'],
-
-            ])
+                'correct'  => $data['correct'],
+            ]);
 
             Category::create([
 
@@ -117,16 +124,10 @@ class CreateQuestionController extends Controller
 
             ]);
 
-            Question::create([
-                'type' => $data['type'],
-                'level' => $data['level'],
-                'instruction' => $data['instruction'],
-                'content' => $data['content'],
-                'listening' => $data['listening'],
+            
 
 
 
-            ]);
             Log::info('Adding Question to the db with listening-> only categories;');
 
         } else {
@@ -139,7 +140,7 @@ class CreateQuestionController extends Controller
                 'answer_c' => $data['answer_c'],
                 'answer_d' => $data['answer_d'],
 
-            ])
+            ]);
 
             Category::create([
 
