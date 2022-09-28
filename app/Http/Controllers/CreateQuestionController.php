@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Answer;
 use App\Models\Question;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
@@ -39,19 +41,22 @@ class CreateQuestionController extends Controller
 
     protected function validator(array $data)
     {
-        Log::info('I am in validator queston');
+        Log::info('I am in validator queston below is the entry data');
         Log::debug($data);
         $validated =  Validator::make($data, [
             'type' => ['required', 'in:multi-choice,reading,listening,trueFalse'],
+            'level' => ['required'],
             'instruction' => ['required', 'string', 'max:255'],
             'content' => ['required', 'unique:questions'],
             'listening' => [''],
-            'answer_a' => ['string'],
-            'answer_b' => ['string'],
-            'answer_c' => ['string'],
-            'answer_d' => ['string'],
-            'correct' => ['required'],
 
+            //answers validation
+            'answer_a' => ['boolean'],
+            'answer_b' => ['boolean'],
+            'answer_c' => ['boolean'],
+            'answer_d' => ['boolean'],
+            
+            //categories validation
             'grammar' => ['boolean'],
             'tenses' => ['boolean'],
             'present_simple' => ['boolean'],
@@ -64,6 +69,7 @@ class CreateQuestionController extends Controller
         $validated = Arr::add($validated, 'present_simple', 0);
         $validated = Arr::add($validated, 'vocabulary', 0);
         $validated = Arr::add($validated, 'business', 0);
+        Log::info('Below is validated data: ');
         Log::debug($validated);
 
         return $validated;
@@ -90,39 +96,73 @@ class CreateQuestionController extends Controller
         if (isset($data['listening'])) {
             $path = $request->file('listening')->store('/public/listenings');
             $data['listening'] = $path;
+            Log::info('Adding Question to the db with listening;');
+
+            Answer::create([
+                
+                'answer_a' => $data['answer_a'],
+                'answer_b' => $data['answer_b'],
+                'answer_c' => $data['answer_c'],
+                'answer_d' => $data['answer_d'],
+
+            ])
+
+            Category::create([
+
+                'tenses' => $data['tenses'] ? 1 : 0,
+                'grammar' => $data['grammar'] ? 1 : 0,
+                'present_simple' => $data['present_simple'] ? 1 : 0,
+                'vocabulary' => $data['vocabulary'] ? 1 : 0,
+                'business' => $data['business'] ? 1 : 0,
+
+            ]);
 
             Question::create([
                 'type' => $data['type'],
+                'level' => $data['level'],
                 'instruction' => $data['instruction'],
                 'content' => $data['content'],
                 'listening' => $data['listening'],
+
+
+
+            ]);
+            Log::info('Adding Question to the db with listening-> only categories;');
+
+        } else {
+            Log::info('Adding Question to the db');
+            Log::debug($data);
+            Answer::create([
+                
                 'answer_a' => $data['answer_a'],
                 'answer_b' => $data['answer_b'],
                 'answer_c' => $data['answer_c'],
                 'answer_d' => $data['answer_d'],
-                'correct' => $data['correct'],
+
+            ])
+
+            Category::create([
+
                 'tenses' => $data['tenses'] ? 1 : 0,
                 'grammar' => $data['grammar'] ? 1 : 0,
                 'present_simple' => $data['present_simple'] ? 1 : 0,
                 'vocabulary' => $data['vocabulary'] ? 1 : 0,
                 'business' => $data['business'] ? 1 : 0,
+                
             ]);
-        } else {
+
             Question::create([
                 'type' => $data['type'],
+                'level' => $data['level'],
                 'instruction' => $data['instruction'],
                 'content' => $data['content'],
-                'answer_a' => $data['answer_a'],
-                'answer_b' => $data['answer_b'],
-                'answer_c' => $data['answer_c'],
-                'answer_d' => $data['answer_d'],
-                'correct' => $data['correct'],
-                'tenses' => $data['tenses'] ? 1 : 0,
-                'grammar' => $data['grammar'] ? 1 : 0,
-                'present_simple' => $data['present_simple'] ? 1 : 0,
-                'vocabulary' => $data['vocabulary'] ? 1 : 0,
-                'business' => $data['business'] ? 1 : 0,
+                'listening' => $data['listening'],
+
+
+
             ]);
+            Log::info('Adding Question to the db-> only categories;');
+            
         }
 
         // Log::debug($data['listening']);

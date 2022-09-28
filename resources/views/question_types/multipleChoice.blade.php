@@ -47,6 +47,14 @@
                 <label class="m-3" for="">C<input type="radio" name="correct" value="answer_c"></label>
                 <label class="m-3" for="">D<input type="radio" name="correct" value="answer_d"></label>
             </div>
+            <div class="container d-flex justify-content-start flex-row align-items-center mt-5">
+                <label class="py-2 m-5" for="formGroupExampleInput">Level:</label>
+                <label class="m-3" for="">A1<input type="radio" name="level" value="a1"></label>
+                <label class="m-3" for="">A2<input type="radio" name="level" value="a2"></label>
+                <label class="m-3" for="">B1<input type="radio" name="level" value="b1"></label>
+                <label class="m-3" for="">B2<input type="radio" name="level" value="b2"></label>
+                <label class="m-3" for="">C1<input type="radio" name="level" value="c1"></label>
+            </div>
         </div>
     
         {{-- Questions' Categories --}}

@@ -28,15 +28,23 @@
             {{-- Answers --}}
             <div class="row">
                 <div class="container d-flex justify-content-start flex-row align-items-center">
-                <label class="py-2 m-5" for="formGroupExampleInput">Correct Answer:</label>
-                {{-- question answer hidden input --}}
-                <input type="hidden" value="1" name="answer_a" id="answer_a">
-                <input type="hidden" value="0" name="answer_b" id="answer_b">
-                <input type="hidden" value="0" name="answer_c" id="answer_c">
-                <input type="hidden" value="0" name="answer_d" id="answer_d">
-                <label class="m-3" for="answer_a">True<input type="radio" name="correct" value="answer_a" id="correct"></label>
-                <label class="m-3" for="answer_b">False<input type="radio" name="correct" value="answer_b" id="correct"></label>
+                    <label class="py-2 m-5" for="formGroupExampleInput">Correct Answer:</label>
+                    {{-- question answer hidden input --}}
+                    <input type="hidden" value="1" name="answer_a" id="answer_a">
+                    <input type="hidden" value="0" name="answer_b" id="answer_b">
+                    <input type="hidden" value="0" name="answer_c" id="answer_c">
+                    <input type="hidden" value="0" name="answer_d" id="answer_d">
+                    <label class="m-3" for="answer_a">True<input type="radio" name="correct" value="answer_a" id="correct"></label>
+                    <label class="m-3" for="answer_b">False<input type="radio" name="correct" value="answer_b" id="correct"></label>
                 
+                </div>
+                <div class="container d-flex justify-content-start flex-row align-items-center mt-5">
+                <label class="py-2 m-5" for="formGroupExampleInput">Level:</label>
+                <label class="m-3" for="">A1<input type="radio" name="level" value="a1"></label>
+                <label class="m-3" for="">A2<input type="radio" name="level" value="a2"></label>
+                <label class="m-3" for="">B1<input type="radio" name="level" value="b1"></label>
+                <label class="m-3" for="">B2<input type="radio" name="level" value="b2"></label>
+                <label class="m-3" for="">C1<input type="radio" name="level" value="c1"></label>
             </div>
             </div>
             
