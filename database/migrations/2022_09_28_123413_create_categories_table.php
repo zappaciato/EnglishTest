@@ -14,13 +14,15 @@ return new class extends Migration
     public function up()
     {
         Schema::create('categories', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->unsignedBigInteger('question_id');
             $table->boolean('grammar')->default(0);
             $table->boolean('tenses')->default(0);
             $table->boolean('present_simple')->default(0);
             $table->boolean('vocabulary')->default(0);
             $table->boolean('business')->default(0);
+
+            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
 
             $table->timestamps();
         });

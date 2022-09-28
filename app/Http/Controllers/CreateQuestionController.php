@@ -56,6 +56,7 @@ class CreateQuestionController extends Controller
             'answer_c' => ['required'],
             'answer_d' => ['required'],
             'correct'  => ['required'],
+
             //categories validation
             'grammar' => ['boolean'],
             'tenses' => ['boolean'],
@@ -64,11 +65,6 @@ class CreateQuestionController extends Controller
             'business' => ['boolean'],
         ])->validate();
 
-        // $validated = Arr::add($validated, 'grammar', 0);
-        // $validated = Arr::add($validated, 'tenses', 0);
-        // $validated = Arr::add($validated, 'present_simple', 0);
-        // $validated = Arr::add($validated, 'vocabulary', 0);
-        // $validated = Arr::add($validated, 'business', 0);
         Log::info('Below is validated data: ');
         Log::debug($validated);
 
@@ -86,19 +82,13 @@ class CreateQuestionController extends Controller
         Log::info('I am in the store method');
 
         $data = $this->validator($request->all());
-        // var_dump($data);
-        // Question::create($data);
-
-        // session()->flash('message', 'Your question has been added!'); 
-
-        // return redirect(route('admin.admin_dashboard'));
 
         if (isset($data['listening'])) {
             $path = $request->file('listening')->store('/public/listenings');
             $data['listening'] = $path;
             Log::info('Adding Question to the db with listening;');
 
-            Question::create([
+            $question = Question::create([
                 'type' => $data['type'],
                 'level' => $data['level'],
                 'instruction' => $data['instruction'],
@@ -107,6 +97,7 @@ class CreateQuestionController extends Controller
             ]);
 
             Answer::create([
+                'question_id' => $question->id,
                 'answer_a' => $data['answer_a'],
                 'answer_b' => $data['answer_b'],
                 'answer_c' => $data['answer_c'],
@@ -115,60 +106,54 @@ class CreateQuestionController extends Controller
             ]);
 
             Category::create([
-
+                'question_id' => $question->id,
                 'tenses' => $data['tenses'] ? 1 : 0,
                 'grammar' => $data['grammar'] ? 1 : 0,
                 'present_simple' => $data['present_simple'] ? 1 : 0,
                 'vocabulary' => $data['vocabulary'] ? 1 : 0,
                 'business' => $data['business'] ? 1 : 0,
-
             ]);
 
-            
-
-
-
-            Log::info('Adding Question to the db with listening-> only categories;');
+            Log::info('Finished adding question with Listening');
 
         } else {
-            Log::info('Adding Question to the db');
+            Log::info('Adding Question to the db wothout listening');
             Log::debug($data);
-            Answer::create([
-                
-                'answer_a' => $data['answer_a'],
-                'answer_b' => $data['answer_b'],
-                'answer_c' => $data['answer_c'],
-                'answer_d' => $data['answer_d'],
 
-            ]);
-
-            Category::create([
-
-                'tenses' => $data['tenses'] ? 1 : 0,
-                'grammar' => $data['grammar'] ? 1 : 0,
-                'present_simple' => $data['present_simple'] ? 1 : 0,
-                'vocabulary' => $data['vocabulary'] ? 1 : 0,
-                'business' => $data['business'] ? 1 : 0,
-                
-            ]);
-
-            Question::create([
+            $question = Question::create([
+                Log::info("Starting adding questions"),
                 'type' => $data['type'],
                 'level' => $data['level'],
                 'instruction' => $data['instruction'],
                 'content' => $data['content'],
-                'listening' => $data['listening'],
-
-
-
             ]);
-            Log::info('Adding Question to the db-> only categories;');
+
+            Log::debug($question);
+            Answer::create([
+                Log::info("Starting adding answers"),
+                Log::debug($question->id),
+                'question_id' => $question->id,
+                'answer_a' => $data['answer_a'],
+                'answer_b' => $data['answer_b'],
+                'answer_c' => $data['answer_c'],
+                'answer_d' => $data['answer_d'],
+                'correct' => $data['correct'],
+            ]);
+            Log::info("Starting adding cateogires");
+
+            Category::create([
+                'question_id' => $question->id,
+                'tenses' => $data['tenses'] ? 1 : 0,
+                'grammar' => $data['grammar'] ? 1 : 0,
+                'present_simple' => $data['present_simple'] ? 1 : 0,
+                'vocabulary' => $data['vocabulary'] ? 1 : 0,
+                'business' => $data['business'] ? 1 : 0,
+                
+            ]);
+
+            Log::info('Finished adding question without listening');
             
         }
-
-        // Log::debug($data['listening']);
-
-
 
         session()->flash('message', 'Your question has been added!');
         return redirect(route('admin.dashboard'));

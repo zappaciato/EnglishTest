@@ -15,7 +15,8 @@ class Category extends Model
         'tenses',
         'present_simple',
         'vocabulary',
-        'business'
+        'business',
+        'question_id'
     ];
 
     public function questions()

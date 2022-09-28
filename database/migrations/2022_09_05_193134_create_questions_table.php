@@ -17,15 +17,13 @@ return new class extends Migration
     {
         Log::info('I am about to make questions table1');
         Schema::create('questions', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->string('type');
             $table->string('level');
             $table->longText('instruction');
             $table->longText('content')->unique();
             $table->string('listening')->nullable();
             
-            // $table->unsignedBigInteger('category_id')->nullable();
-            // $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();
 
         });
