@@ -44,7 +44,16 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-
         return $this->id === 1;
+    }
+
+    public function results()
+    {
+        $this->hasOne(Category::class, 'result_id', 'id');
+    }
+    //TODO: make sure of that has to be here
+    public function questions()
+    {
+        $this->hasMany(Category::class, 'question_id', 'id');
     }
 }
