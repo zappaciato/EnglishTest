@@ -21,22 +21,22 @@ class CreateQuestionController extends Controller
 
     public function createMultipleChoice()
     {
-        return view('question_types.multipleChoice');
+        return view('question_types.create_multipleChoice');
     }
 
     public function createTrueFalse()
     {
-        return view('question_types.trueFalse');
+        return view('question_types.create_trueFalse');
     }
 
     public function createReading()
     {
-        return view('question_types.reading');
+        return view('question_types.create_reading');
     }
 
     public function createListening()
     {
-        return view('question_types.listening');
+        return view('question_types.create_listening');
     }
 
     protected function validator(array $data)

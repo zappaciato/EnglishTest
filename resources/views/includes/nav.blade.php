@@ -1,7 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                
-                
                 @auth
                 @can('manage-page')
                     <a class="navbar-brand" href="{{ route('admin.dashboard') }}">{{ config('app.name', 'EnglishTest') }}</a>
@@ -23,10 +21,11 @@
                 
 
                 @can('manage-page')
-                        <a class="text-decoration-none p-2 text-danger" href="{{route('test.question')}}">Test Yourself Admin</a>
+                        <a class="text-decoration-none p-2 text-danger" href="{{ route('admin.dashboard') }}">{{ __('Admin Dashboard') }}</a>
+                        <a class="text-decoration-none p-2 text-danger" href="{{ route('admin.dashboard') }}">{{ __('Admin Statistics') }}</a>
                 @else
                 @auth
-                        <a class="text-decoration-none p-2 text-danger" href="{{route('test.question')}}">Test Yourself</a>
+                        <a class="text-decoration-none p-2 text-danger" href="{{route('user.dashboard')}}">{{ __('User Dashboard') }}</a>
                 @endauth
                 @endcan
                         

@@ -2,15 +2,15 @@
 
 @section('content')
 
-<form method="POST" action="{{ route('question.truefalse') }}">
+<form method="POST" action="{{ route('create.question.reading') }}">
         @csrf
 
 
         {{-- question type hidden input --}}
-        <input type="hidden" value="trueFalse" name="type" id="type">
+        <input type="hidden" value="reading" name="type" id="type">
 
         <div class="d-flex flex-column py-5 container align-items-center" >
-            <div style="width: 50vw; margin-bottom: 30px;" class="d-flex justify-content-start align-items-start"><h2>Add a True or False question</h2></div>
+            <div style="width: 50vw; margin-bottom: 30px;" class="d-flex justify-content-start align-items-start"><h2>Add a reading question</h2></div>
         
         {{-- Question and instructions --}}
         <div style="width:45vw; height:auto" class="form-group d-flex flex-column">
@@ -26,19 +26,29 @@
             </div>
 
             {{-- Answers --}}
-            <div class="row">
-                <div class="container d-flex justify-content-start flex-row align-items-center">
-                    <label class="py-2 m-5" for="formGroupExampleInput">Correct Answer:</label>
-                    {{-- question answer hidden input --}}
-                    <input type="hidden" value="1" name="answer_a" id="answer_a">
-                    <input type="hidden" value="0" name="answer_b" id="answer_b">
-                    <input type="hidden" value="0" name="answer_c" id="answer_c">
-                    <input type="hidden" value="0" name="answer_d" id="answer_d">
-                    <label class="m-3" for="answer_a">True<input type="radio" name="correct" value="answer_a" id="correct"></label>
-                    <label class="m-3" for="answer_b">False<input type="radio" name="correct" value="answer_b" id="correct"></label>
-                
+            <div class="row mt-5">
+                <label for="">Answers</label>
+                <div class="col">
+                    <span>A</span><input type="text" class="form-control border border-secondary" name="answer_a" value="{{old('answer_a')}}" placeholder="Answer A">
                 </div>
-                <div class="container d-flex justify-content-start flex-row align-items-center mt-5">
+                <div class="col">
+                    <span>B</span><input type="text" class="form-control border border-secondary" name="answer_b" value="{{old('answer_b')}}" placeholder="Answer B">
+                </div>
+                <div class="col">
+                    <span>C</span><input type="text" class="form-control border border-secondary" name="answer_c" value="{{old('answer_c')}}" placeholder="Answer C">
+                </div>
+                <div class="col">
+                    <span>D</span><input type="text" class="form-control border border-secondary" name="answer_d" value="{{old('answer_d')}}" placeholder="Answer D">
+                </div>
+            </div>
+            <div class="container d-flex justify-content-start flex-row align-items-center mt-5">
+                <label class="py-2 m-5" for="formGroupExampleInput">Correct Answer:</label>
+                <label class="m-3" for="">A<input type="radio" name="correct" value="a"></label>
+                <label class="m-3" for="">B<input type="radio" name="correct" value="b"></label>
+                <label class="m-3" for="">C<input type="radio" name="correct" value="c"></label>
+                <label class="m-3" for="">D<input type="radio" name="correct" value="d"></label>
+            </div>
+            <div class="container d-flex justify-content-start flex-row align-items-center mt-5">
                 <label class="py-2 m-5" for="formGroupExampleInput">Level:</label>
                 <label class="m-3" for="">A1<input type="radio" name="level" value="a1"></label>
                 <label class="m-3" for="">A2<input type="radio" name="level" value="a2"></label>
@@ -46,8 +56,6 @@
                 <label class="m-3" for="">B2<input type="radio" name="level" value="b2"></label>
                 <label class="m-3" for="">C1<input type="radio" name="level" value="c1"></label>
             </div>
-            </div>
-            
         </div>
     
         {{-- Questions' Categories --}}
@@ -59,6 +67,5 @@
             </div>
         </div>
     </form>
-
 
 @endsection

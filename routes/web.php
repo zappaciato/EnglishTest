@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\CreateQuestionController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\UserController;
@@ -29,18 +30,28 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/user-dashboard', [UserController::class, 'index'])->name('user.dashboard');
 Route::get('/test-question', [QuestionController::class, 'randomQuestion'])->name('test.question');
 
+Route::post('/test-question', [QuestionController::class, 'result']);
+Route::get('/question-list', [QuestionController::class, 'index'])->name('questions.list');
+
+//question edit
+// Route::get('/test-question/{id}', [QuestionController::class, 'edit'])->name('admin.post.edit');
+// Route::put('/test-question/{id}', [QuestionController::class, 'update']);
+
+
+//question delete
+// Route::delete('/test-question/{id}', [QuestionController::class, 'destroy'])->name('admin.post.delete');
+
+
 Route::get('/admin-dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 
 Route::get('/add-question', [AdminController::class, 'create'])->name('add.question');
-Route::get('/add-multi-question', [CreateQuestionController::class, 'createMultipleChoice'])->name('question.multi');
-Route::get('/add-truefalse-question', [CreateQuestionController::class, 'createTrueFalse'])->name('question.truefalse');
-Route::get('/add-reading-question', [CreateQuestionController::class, 'createReading'])->name('question.reading');
-Route::get('/add-listening-question', [CreateQuestionController::class, 'createListening'])->name('question.listening');
+Route::get('/add-multi-question', [CreateQuestionController::class, 'createMultipleChoice'])->name('create.question.multi');
+Route::get('/add-truefalse-question', [CreateQuestionController::class, 'createTrueFalse'])->name('create.question.truefalse');
+Route::get('/add-reading-question', [CreateQuestionController::class, 'createReading'])->name('create.question.reading');
+Route::get('/add-listening-question', [CreateQuestionController::class, 'createListening'])->name('create.question.listening');
 
 Route::post('/add-multi-question', [CreateQuestionController::class, 'store']);
 Route::post('/add-truefalse-question', [CreateQuestionController::class, 'store']);
 Route::post('/add-reading-question', [CreateQuestionController::class, 'store']);
 Route::post('/add-listening-question', [CreateQuestionController::class, 'store']);
 
-// Route::get('/admin/question/{id}', [AdminController::class, 'edit'])->name('admin.post.edit');
-// Route::put('/admin/question/{id}', [AdminController::class, 'update']);

@@ -6,9 +6,12 @@
         <div class="col-md-12">
             <div class="card container">
       {{-- Here goes auth() for admin user or any other user --}}
-                <div class="container-fluid card-header d-flex justify-content-between"> 
-                    <h3>{{ __('Admin Dashboard') }}</h3>
-                    <h3><a class="text-decoration-none p-2 text-danger" href=" {{route('add.question')}}">Add Questions</a></h3>
+                <div class="container-fluid card-header d-flex justify-content-start"> 
+                    {{-- <h3>{{ __('Admin Dashboard') }}</h3> --}}
+                    <h3><a class="text-decoration-none text-underline-hover p-2 text-primary h5" href=" {{route('questions.list')}}">View Questions</a></h3>
+                    <h3><a class="text-decoration-none p-2 text-primary h5" href=" {{route('add.question')}}">Add Questions</a></h3>
+                    <h3><a class="text-decoration-none p-2 text-primary h5" href=" {{route('test.question')}}">Test Yourself</a></h3>
+                    
                 </div>
                 <div class="row justify-content-evenly p-5">
                     <div class="col-sm border p-5 d-flex flex-column align-items-center justify-content-center" >

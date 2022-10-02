@@ -22,8 +22,7 @@ class AdminController extends Controller
     {
         $users = User::all();
         $questions = Question::all();
-        // Log::debug($questions);
-        // return view('admin.admin_dashboard')->with('questions', 'users');
+
         return view('admin.admin_dashboard', compact('users', 'questions'));
     }
 
