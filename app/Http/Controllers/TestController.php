@@ -60,7 +60,13 @@ class TestController extends Controller
         
         // $data = $this->validator($request->all());
         $data = $request->all();
-        // Log::debug($data);
+        Log::debug($data);
+
+        Result::create([
+            'user_id' => $userId,
+            'question_id' => '666',
+            'user_answer' => $data['user_answer'],
+        ]);
 
         if($userId === 1) {
             return redirect(route('admin.dashboard')); //change to results veiw later

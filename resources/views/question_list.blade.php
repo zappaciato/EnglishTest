@@ -3,7 +3,9 @@
 @section('content')
 <div class="container">
 
+    @if (!$questionData)
 <table class="border d-flex p-2">
+
     <tr>
         <th>Question Id</th>
         <th>Content</th>
@@ -13,6 +15,10 @@
     </tr>
     <tr>
         
+            
+        
+
+
         @for ($i=0; $i<count($questionData); $i++)
 
         <td class="border" >{{$questionData[$i][0]->id}}</td> 
@@ -31,8 +37,11 @@
             <span> <a href="href= {{route('test.question', ['id'=>$questionData[$i][0]->id])}}" class="btn btn-primary btn-sm"> Edit</a></span>
         </td>
     </tr>
-     @endfor
+    @endfor
+    
 </table>
-
+@else
+    <h1>There are no questions yet. <a href="{{route('add.question')}}">Add more Questions</a> to see them here. </h1>
+@endif
 </div>
 @endsection

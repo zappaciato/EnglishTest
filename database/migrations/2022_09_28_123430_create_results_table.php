@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('question_id');
+            $table->string('user_answer');
             $table->integer('correct');
 
             $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');

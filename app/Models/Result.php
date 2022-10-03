@@ -9,6 +9,12 @@ class Result extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'question_id',
+        'user_id',
+        'user_answer',
+        'correct',
+    ];
 
     public function questions()
     {
