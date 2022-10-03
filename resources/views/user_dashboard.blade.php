@@ -18,15 +18,15 @@
                     </div>
                     <div class="col-sm border p-5 d-flex flex-column align-items-center" >
                         <h5>Questions answered:</h5>
-                        <h3>0</h3>
+                        <h3>{{count($resultsAll)}}</h3>
                     </div>
                     <div class="col-sm border p-5 d-flex flex-column align-items-center" >
                         <h5>Correct answers:</h5>
-                        <h3>0</h3>
+                        <h3>{{count($resultsCorrect)}}</h3>
                     </div>
                     <div class="col-sm border p-5 d-flex flex-column align-items-center" >
                         <h5>English Level</h5>
-                        <h3>B1</h3>
+                        <h3>{{$englishLevel}}</h3>
                     </div>
                 </div>
             </div>
