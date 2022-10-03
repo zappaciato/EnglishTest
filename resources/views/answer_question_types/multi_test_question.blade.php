@@ -8,7 +8,7 @@
 
     <div class="modal-content">
 
-        <input type="hidden" value="{{session()->auth()->id}}" name="user_id">
+        {{-- <input type="hidden" value="{{session()->auth()->id}}" name="user_id"> --}}
         <input type="hidden" value="{{$question->id}}" name="question_id">
         @include('partials.question_block.instruction')
 

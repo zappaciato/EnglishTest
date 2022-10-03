@@ -13,27 +13,15 @@ use Illuminate\Support\Facades\Session;
 
 class TestController extends Controller
 {
-    protected $questionId;
-    #show a random question and filter through those which are done by this user
+    #show a random question TODO: and filter through those which are done by this user
     public function randomQuestion()
     {
-        $user = auth()->user();
+        Log::info('I am in random question in Test Controller');
+
         $question = Question::inRandomOrder()->firstOrFail();
         $questionId = $question->id;
-        $this->questionId = $questionId;
-        Log::info('I am in random question in Test Controller');
-        Log::debug($this->questionId);
-
-        $answers = Answer::find($this->questionId);
-        // Log::debug($answers);
-        $categories = Category::find($this->questionId);
-        // Log::debug($categories);
-
-        
-        // session()->set('questionId', $questionId);
-
-        // $results = Result::find($id === 1);
-        // Log::debug($results);
+        $answers = Answer::find($questionId);
+        $categories = Category::find($questionId);
 
         if($question->type === 'multi-choice') {
             return view('answer_question_types.multi_test_question', compact('question', 'answers'));
@@ -50,26 +38,36 @@ class TestController extends Controller
     }
 
 
-
     public function store(Request $request)
-    {   
-        $userId = auth()->user()->id;
-
+    {
         Log::info('I am in the RESULT store method');
-        // $questionId = $this->questionId;
-        
-        // $data = $this->validator($request->all());
+        //submitted answer
         $data = $request->all();
+        $userId = auth()->user()->id;
+        //define success correct answer defualt false (incorrect);
+        $successAnswer = 0;
+        //get the question ID to retrive correct answer;
+        $questionId = $data['question_id'];
+        //Get the correct answer from db
+        $answer = Answer::get()->where('id', $questionId)->first();
+
         Log::debug($data);
 
+        //check if answert is correct
+        if($answer->correct === $data['user_answer']) {
+            $successAnswer = 1;
+        }; 
+
+        //add the results to the db 
         Result::create([
             'user_id' => $userId,
-            'question_id' => '666',
+            'question_id' => $data['question_id'],
             'user_answer' => $data['user_answer'],
+            'correct' => $successAnswer,
         ]);
 
         if($userId === 1) {
-            return redirect(route('admin.dashboard')); //change to results veiw later
+            return redirect(route('admin.dashboard')); //change to results view later
         } else {
             return redirect(route('user.dashboard'));
         }
