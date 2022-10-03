@@ -2,8 +2,7 @@
 
 @section('content')
 <div class="container">
-
-    @if (!$questionData)
+    @if (($questionData->count() > 0))
 <table class="border d-flex p-2">
 
     <tr>
