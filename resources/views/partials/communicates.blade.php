@@ -1,3 +1,4 @@
+
 @if($errors->count()) 
     <div class="message bg-warning">
     {{-- teraz przelatujemy przez wszystkie bledy --}}
@@ -8,8 +9,15 @@
 @endif
 
 @if(session('message'))
-<div class="message">{{session('message')}}</div>
+
+<div class="message alert alert-success">
+  <h3>{{session('message')}}</h3>
+  <a class="close">&times;</a>
+</div>
+
 @endif
+
+
 
 {{-- @if(session('verified'))
 <div class="message">Your email has been verified!</div>
@@ -21,3 +29,13 @@
 {{-- @php
 dd(session());    
 @endphp --}}
+
+
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script>
+    $(".close").click(function() {
+  $(this)
+    .parent(".alert")
+    .fadeOut();
+});
+</script>
