@@ -70,11 +70,10 @@ class LoginController extends Controller
         session()->flash('message', "Hi {$user->name}, You have been successfully logged in!");
 
         if($user->id === 1) {
-            // return view('admin.Admin_dashboard');
             return redirect()->route('admin.dashboard');
         } else {
             return redirect()->route('user.dashboard');
-            // return view('user_dashboard');
+
         }
     }
 }
