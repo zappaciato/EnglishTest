@@ -24,16 +24,16 @@
                         <h3 style="font-size: 1.8rem">{{count($questions)}}</h3>
                     </div>
                     <div class="col-sm border p-5 justify-content-center d-flex flex-column align-items-center" >
-                        <h5 style="font-size: 0.8rem">Questions answered:</h5>
-                        <h3 style="font-size: 1.8rem">0</h3>
+                        <h5 style="font-size: 0.8rem">Questions answered to date:</h5>
+                        <h3 style="font-size: 1.8rem">{{count($results)}}</h3>
                     </div>
                     <div class="col-sm border p-5 justify-content-center d-flex flex-column align-items-center" >
-                        <h5 style="font-size: 0.6rem">Top User (number answered):</h5>
-                        <h3 style="font-size: 1.8rem">0</h3>
+                        <h5 style="font-size: 0.6rem">Top User:</h5>
+                        <h3 style="font-size: 1.8rem">{{$userName->name}}</h3>
                     </div>
                     <div class="col-sm border p-5 justify-content-center d-flex flex-column align-items-center" >
                         <h5 style="font-size: 0.6rem">Top User (correct answers):</h5>
-                        <h3 style="font-size: 1.8rem">0</h3>
+                        <h3 style="font-size: 1.8rem">{{$stats->general_correct}}</h3>
                     </div>
                 </div>
             </div>

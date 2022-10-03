@@ -16,6 +16,7 @@ class UserController extends Controller
     }
 
     public function calculateGeneralResults($resultsAll, $resultsCorrect) {
+        if(count($resultsAll) >0) {
         $correctRatio = (count($resultsCorrect) / count($resultsAll)) * 100;
         if($correctRatio < 25) {
             return 'A1';
@@ -28,6 +29,9 @@ class UserController extends Controller
         } elseif ($correctRatio > 80) {
             return 'C1';
         }
+    } else {
+        return 'no questions answered';
+    }
     }
 
     public function index(Request $request)

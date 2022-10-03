@@ -6,6 +6,7 @@ use App\Models\Answer;
 use App\Models\Category;
 use App\Models\Question;
 use App\Models\Result;
+use App\Models\Statistics;
 use Illuminate\Http\Request;
 use Illuminate\Session\Store;
 use Illuminate\Support\Facades\Log;
@@ -50,14 +51,19 @@ class TestController extends Controller
         $questionId = $data['question_id'];
         //Get the correct answer from db
         $answer = Answer::get()->where('id', $questionId)->first();
-
+        $statsUpdate = Statistics::find(auth()->id());
         Log::debug($data);
 
-        //check if answert is correct
+        //check if answert is correct and update the result in statistics table;
         if($answer->correct == $data['user_answer']) {
             $successAnswer = 1;
-        }; 
+            $statsUpdate->increment('general_correct');
 
+        } else {
+            $statsUpdate->increment('general_incorrect');
+        };
+
+        
         //add the results to the db 
         Result::create([
             'user_id' => $userId,
@@ -65,6 +71,8 @@ class TestController extends Controller
             'user_answer' => $data['user_answer'],
             'correct' => $successAnswer,
         ]);
+
+        //add the answer value to stats table
 
         if($userId === 1) {
             return redirect(route('admin.dashboard')); //change to results view later
