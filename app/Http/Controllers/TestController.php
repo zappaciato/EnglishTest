@@ -54,7 +54,7 @@ class TestController extends Controller
         Log::debug($data);
 
         //check if answert is correct
-        if($answer->correct === $data['user_answer']) {
+        if($answer->correct == $data['user_answer']) {
             $successAnswer = 1;
         }; 
 
