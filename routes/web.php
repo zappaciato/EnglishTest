@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\CreateQuestionController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -28,9 +29,11 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/user-dashboard', [UserController::class, 'index'])->name('user.dashboard');
-Route::get('/test-question', [QuestionController::class, 'randomQuestion'])->name('test.question');
 
-Route::post('/test-question', [QuestionController::class, 'result']);
+Route::get('/test-question', [TestController::class, 'randomQuestion'])->name('test.question');
+Route::post('/test-question', [TestController::class, 'store']);
+
+
 Route::get('/question-list', [QuestionController::class, 'index'])->name('questions.list');
 
 //question edit

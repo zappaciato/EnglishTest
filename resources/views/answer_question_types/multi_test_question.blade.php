@@ -1,21 +1,21 @@
-{{-- @extends('layouts.app')
+@extends('layouts.app')
 
 <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" >
 
 @section('content')
-
+<form method="POST" action="{{route('test.question')}}">
+    @csrf
 <div class="bg-info container d-flex justify-content-start flex-column align-items-start mt-2 border">
     <div class="modal-content">
+
         @include('partials.question_block.instruction')
 
-        <div class="modal-header">
-            <h3 class="text-secondary mt-5">{{$question->content}}</h3>
-        </div>
+        @include('partials.question_block.content')
 
         @include('partials.question_block.multi_answers')
 
        <div>
-       <input class="btn btn-secondary mt-5" type="submit" value="Submit">
+       <input class="btn btn-secondary mt-5" type="submit" value="submit">
        </div>
    </div>
 
@@ -26,6 +26,7 @@
 @endcan
 
 </div>
-</div>
-</div>
-@endsection --}}
+    
+
+</form>
+@endsection

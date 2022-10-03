@@ -20,6 +20,7 @@ class AdminController extends Controller
 
     public function index()
     {
+        Log::info('I am in index Admin Controller. ');
         $users = User::all();
         $questions = Question::all();
 

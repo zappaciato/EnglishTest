@@ -1,4 +1,4 @@
-{{-- @extends('layouts.app')
+@extends('layouts.app')
 
 <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" >
 
@@ -28,4 +28,4 @@
 </div>
 </div>
 </div>
-@endsection --}}
+@endsection

@@ -3,7 +3,7 @@
 
 <div class="container-md d-flex flex-column p-5">
 
-<form action="POST" action="{{route('test.question')}}">
+<form method="POST" action="{{route('test.question')}}">
 <div class="d-flex flex-column p-5">
 {{-- <h4>Question number: {{$question->id}}</h4> --}}
 

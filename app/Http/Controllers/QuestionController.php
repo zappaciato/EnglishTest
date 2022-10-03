@@ -31,21 +31,7 @@ class QuestionController extends Controller
     }
 
 
-    #show a random question and filter through those which are done by this user
-    public function randomQuestion()
-    {   $user = auth()->user();
-        $question = Question::inRandomOrder()->firstOrFail();
-        $id = $question->id;
-        Log::debug($question);
 
-        $answers = Answer::find($id = $question->id);
-        Log::debug($answers);
-        $categories = Category::find($id = $question->id);
-        Log::debug($categories);
-        $results = Result::find($id === 1);
-        Log::debug($results);
-        return view('test_question', compact('question', 'answers'));
-    }
 
     // public function edit ($id)  {
     //         //szukamy posta z danym id
@@ -54,8 +40,5 @@ class QuestionController extends Controller
     //         return view('admin.post.edit', compact('post'));
     //     }
 
-    public function result()
-    {
-        //
-    }
+    
 }

@@ -1,4 +1,4 @@
-{{-- @extends('layouts.app')
+@extends('layouts.app')
 
 <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" >
 
@@ -12,7 +12,7 @@
             <h3 class="text-secondary mt-5">{{$question->content}}</h3>
         </div>
 
-        @include('partials.question_block.multi_answers')
+        @include('partials.question_block.truefalse_answers')
 
        <div>
        <input class="btn btn-secondary mt-5" type="submit" value="Submit">
@@ -28,4 +28,4 @@
 </div>
 </div>
 </div>
-@endsection --}}
+@endsection
