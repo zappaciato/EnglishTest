@@ -8,8 +8,8 @@
 
     <div class="modal-content">
 
-        {{-- <input type="hidden" value="{{session()->auth()->id}}" name="user_id"> --}}
         <input type="hidden" value="{{$question->id}}" name="question_id">
+        
         @include('partials.question_block.instruction')
 
         @include('partials.question_block.content_listening')
@@ -23,9 +23,9 @@
     </div>
 
 @can('manage-page')
-<a href="{{route('admin.dashboard')}}" class="btn btn-secondary mb-2" style="width: 10rem; margin-top:30px;">Go back to dashboard</a>
+<a href="{{route('admin.dashboard')}}" class="btn btn-secondary mb-2" style="width: 10rem; margin-top:30px;">{{ __('Go back to dashboard') }}</a>
 @else
-<a href="{{route('user.dashboard')}}" class="btn btn-secondary mb-2" style="width: 10rem; margin-top:30px;">Go back to dashboard</a>
+<a href="{{route('user.dashboard')}}" class="btn btn-secondary mb-2" style="width: 10rem; margin-top:30px;">{{ __('Go back to dashboard') }}</a>
 @endcan
 
 </div>

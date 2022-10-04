@@ -25,32 +25,19 @@ class AdminController extends Controller
 
     public function index()
     {
-        Log::info('I am in index Admin Controller. ');
-        $users = User::all();
-        $questions = Question::all();
+        //get all the data needed for dispplaying on Admin Dashboard;
+        $users = User::get();
+        $questions = Question::get();
         $results = Result::get();
-        // Log::debug($results);
 
-        //Array of leaders in correctly answered questions
-        // $numberOfUsers = Result::distinct()->count('user_id'); //to nam daje liczbe odrebnych id czyli ilośc userów; 
-        // for($i=0; $i<$numberOfUsers; $i++) {
-        //     $resultsPerUser = Result::where('user_id', $i+1)->get();
-        //     $numberCorrectAnswers = count($resultsPerUser->where('correct', '=', 1));
-        //     $rankingArr[$i+1] = $numberCorrectAnswers;
-        // }
-        // print_r($rankingArr);
-        
         //get user with most correct answers
-
         $stats = Statistics::orderBy('general_correct', 'desc')->first();
 
-        //get the username
-        $userName = $users->find($stats->id);
-
-        return view('admin.admin_dashboard', compact('users', 'questions', 'results', 'stats', 'userName'));
+        return view('admin.admin_dashboard', compact('users', 'questions', 'results', 'stats'));
     }
 
     public function create() {
         return view('add_question');
     }
+    
 }

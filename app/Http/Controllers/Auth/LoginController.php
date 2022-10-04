@@ -33,21 +33,6 @@ class LoginController extends Controller
 
     // protected $redirectTo = RouteServiceProvider::HOME;
 
-    //TO DO : The function below should redirect the authorized user to go to dashboard and admin to admin dashboard. It can be done differently. 
-    // protected function redirectTo()
-    // {
-    //     $user = User::get()->firstOrFail();
-    //     Log::debug($user);
-    //     if ($user->id === 1) {
-    //         $redirectTo = "/admin-dashboard";
-    //         return $redirectTo;
-    //     } else {
-    //         $redirectTo = "/user-dashboard";
-    //         return $redirectTo;
-    //     }
-    // }
-
-
     /**
      * Create a new controller instance.
      *

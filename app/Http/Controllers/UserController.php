@@ -30,7 +30,7 @@ class UserController extends Controller
             return 'C1';
         }
     } else {
-        return 'no questions answered';
+        return 'no questions answered yet!';
     }
     }
 
@@ -42,9 +42,6 @@ class UserController extends Controller
         $resultsAll = Result::get()->where('user_id', $userId);
         $resultsCorrect = $resultsAll->where('correct', '=', 1);
         $englishLevel = $this->calculateGeneralResults($resultsAll, $resultsCorrect);
-        // $correctRatio = (count($resultsCorrect) / count($resultsAll))*100;
-
-
         
         return view('user_dashboard', compact('questions', 'resultsAll', 'resultsCorrect', 'englishLevel'));
     }

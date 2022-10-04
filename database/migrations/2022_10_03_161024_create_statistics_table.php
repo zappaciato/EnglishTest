@@ -16,9 +16,16 @@ return new class extends Migration
         Schema::create('statistics', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->string('name');
             $table->integer('general_correct');
             $table->integer('general_incorrect');
+            $table->integer('cat_tenses_correct');
+            $table->integer('cat_tenses_incorrect');
+            $table->integer('cat_grammar_correct');
+            $table->integer('cat_grammar_incorrect');
+
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            
             $table->timestamps();
         });
     }

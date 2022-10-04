@@ -32,9 +32,10 @@ class QuestionController extends Controller
 
 
 
+//Here we can edit the questions;
 
     // public function edit ($id)  {
-    //         //szukamy posta z danym id
+    //         //szukamy quesiton z danym id
     //         $question = Question::findOrFail($id);
             
     //         return view('admin.post.edit', compact('post'));
