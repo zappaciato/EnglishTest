@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Statistics;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -83,5 +84,24 @@ class RegisterController extends Controller
     protected function registered(Request $request, $user)
     {
         session()->flash('message', "Hi {$user->name}, you have been registered and logged in!");
+
+        // here we also create the stats table which later will be incremented depending on the correct answers
+        Statistics::create([
+            'user_id' => $user->id,
+            'name' => $user->name,
+            'general_correct' => 0,
+            'general_incorrect' => 0,
+            'cat_tenses_correct' => 0,
+            'cat_tenses_incorrect' => 0,
+            'cat_grammar_correct' => 0,
+            'cat_grammar_incorrect' => 0,
+
+        ]);
+
+        if ($user->id === 1) {
+            return redirect()->route('admin.dashboard');
+        } else {
+            return redirect()->route('user.dashboard');
+        }
     }
 }

@@ -14,29 +14,28 @@ class CreateQuestionController extends Controller
 {
     public function __construct()
     {
-        Log::info("I am in the construck in Admin controller.");
         $this->middleware('auth');
         $this->middleware('can:manage-page');
     }
 
     public function createMultipleChoice()
     {
-        return view('question_types.multipleChoice');
+        return view('question_types.create_multipleChoice');
     }
 
     public function createTrueFalse()
     {
-        return view('question_types.trueFalse');
+        return view('question_types.create_trueFalse');
     }
 
     public function createReading()
     {
-        return view('question_types.reading');
+        return view('question_types.create_reading');
     }
 
     public function createListening()
     {
-        return view('question_types.listening');
+        return view('question_types.create_listening');
     }
 
     protected function validator(array $data)
@@ -65,9 +64,6 @@ class CreateQuestionController extends Controller
             'business' => ['boolean'],
         ])->validate();
 
-        Log::info('Below is validated data: ');
-        Log::debug($validated);
-
         return $validated;
     }
 
@@ -77,6 +73,8 @@ class CreateQuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    //TODO: This method needs to be refactored.
     public function store(Request $request)
     {
         Log::info('I am in the store method');
@@ -84,8 +82,10 @@ class CreateQuestionController extends Controller
         $data = $this->validator($request->all());
 
         if (isset($data['listening'])) {
-            $path = $request->file('listening')->store('/public/listenings');
+
+            $path = $request->file('listening')->store('/public/listenings'); //TODO: to fix it 
             $data['listening'] = $path;
+
             Log::info('Adding Question to the db with listening;');
 
             $question = Question::create([

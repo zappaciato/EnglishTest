@@ -1,16 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-
-<form method="POST" action="{{ route('question.reading') }}">
+    
+    <form method="POST" action="{{ route('create.question.multi') }}">
         @csrf
-
-
+        
         {{-- question type hidden input --}}
-        <input type="hidden" value="reading" name="type" id="type">
+        <input type="hidden" value="multi-choice" name="type" id="type">
 
         <div class="d-flex flex-column py-5 container align-items-center" >
-            <div style="width: 50vw; margin-bottom: 30px;" class="d-flex justify-content-start align-items-start"><h2>Add a reading question</h2></div>
+            <div style="width: 50vw; margin-bottom: 30px;" class="d-flex justify-content-start align-items-start"><h2>Add a multiple choice question</h2></div>
         
         {{-- Question and instructions --}}
         <div style="width:45vw; height:auto" class="form-group d-flex flex-column">
@@ -41,14 +40,14 @@
                     <span>D</span><input type="text" class="form-control border border-secondary" name="answer_d" value="{{old('answer_d')}}" placeholder="Answer D">
                 </div>
             </div>
-            <div class="container d-flex justify-content-start flex-row align-items-center mt-5">
+            <div class="container d-flex justify-content-start flex-row align-items-center mt-2">
                 <label class="py-2 m-5" for="formGroupExampleInput">Correct Answer:</label>
-                <label class="m-3" for="">A<input type="radio" name="correct" value="a"></label>
-                <label class="m-3" for="">B<input type="radio" name="correct" value="b"></label>
-                <label class="m-3" for="">C<input type="radio" name="correct" value="c"></label>
-                <label class="m-3" for="">D<input type="radio" name="correct" value="d"></label>
+                <label class="m-3" for="">A<input type="radio" name="correct" value="answer_a"></label>
+                <label class="m-3" for="">B<input type="radio" name="correct" value="answer_b"></label>
+                <label class="m-3" for="">C<input type="radio" name="correct" value="answer_c"></label>
+                <label class="m-3" for="">D<input type="radio" name="correct" value="answer_d"></label>
             </div>
-            <div class="container d-flex justify-content-start flex-row align-items-center mt-5">
+            <div class="container d-flex justify-content-start flex-row align-items-center">
                 <label class="py-2 m-5" for="formGroupExampleInput">Level:</label>
                 <label class="m-3" for="">A1<input type="radio" name="level" value="a1"></label>
                 <label class="m-3" for="">A2<input type="radio" name="level" value="a2"></label>
@@ -67,5 +66,4 @@
             </div>
         </div>
     </form>
-
 @endsection

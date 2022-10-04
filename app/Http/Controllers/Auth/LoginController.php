@@ -31,22 +31,7 @@ class LoginController extends Controller
      * @var string
      */
 
-    protected $redirectTo = RouteServiceProvider::HOME;
-
-    //TO DO : The function below should redirect the authorized user to go to dashboard and admin to admin dashboard. It can be done differently. 
-    // protected function redirectTo()
-    // {
-    //     $user = User::get()->firstOrFail();
-    //     Log::debug($user);
-    //     if ($user->id === 1) {
-    //         $redirectTo = "/admin-dashboard";
-    //         return $redirectTo;
-    //     } else {
-    //         $redirectTo = "/user-dashboard";
-    //         return $redirectTo;
-    //     }
-    // }
-
+    // protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -68,5 +53,12 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         session()->flash('message', "Hi {$user->name}, You have been successfully logged in!");
+
+        if($user->id === 1) {
+            return redirect()->route('admin.dashboard');
+        } else {
+            return redirect()->route('user.dashboard');
+
+        }
     }
 }

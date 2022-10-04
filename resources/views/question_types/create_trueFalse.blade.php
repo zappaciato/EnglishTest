@@ -2,7 +2,7 @@
 
 @section('content')
 
-<form method="POST" action="{{ route('question.truefalse') }}">
+<form method="POST" action="{{ route('create.question.truefalse') }}">
         @csrf
 
 
