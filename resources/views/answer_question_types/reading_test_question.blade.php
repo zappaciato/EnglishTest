@@ -8,7 +8,7 @@
 
     <div class="modal-content">
 
-        <input type="hidden" value="{{$question[0]->id}}" name="question_id">
+        <input type="hidden" value="{{$question->id}}" name="question_id">
         
         @include('partials.question_block.instruction')
 

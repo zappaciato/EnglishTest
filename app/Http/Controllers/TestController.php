@@ -11,86 +11,98 @@ use Illuminate\Http\Request;
 use Illuminate\Session\Store;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
+use Ramsey\Uuid\Type\Integer;
 
 class TestController extends Controller
 {
-    #show a random question TODO: and filter through those which are done by this user
-    public function randomQuestion()
-    {
-        // $userId = auth()->user()->id;
-        // $question = [];
+
+    protected function getRandomQuestionId() {
+
+        Log::info("I am in GETrANDOMquestion");
         do {
             Log::info('initializing do-while loop');
-            //get random questions only ids limited to 3 per draw output array of obj [];
-            $randomQuestionsIds = Question::all('id')->random(3);
+            //get random questions only ids limited to 10 per draw output array of obj [];
+            $randomQuestionsIds = Question::all('id')->random(10);
 
             //get all questions answered by user (it can be slow..) output array of obj[];
             $allAnsweredQuestionsIds = Result::where('user_id', auth()->user()->id)->get(['question_id AS id']);
             //compare the arrays with method diff(); 
 
             $difference = $randomQuestionsIds->diff($allAnsweredQuestionsIds); //it lists only the difference
+            $randomQuestionId = $difference->random(1)[0]->id;
             //return the question which hasn't been answered
 
-            $question = Question::findOrFail($difference->random(1));
+        } while (count($difference) === 0);
 
-        } while(count($difference) === 0);
-
-        //get the question id to find matched answers and categories;
-        $questionId = $question[0]->id;
-        $answers = Answer::find($questionId);
-        $categories = Category::find($questionId);
-
-        //redirect to the view related to the randomly picked question;
-        if ($question[0]->type === 'multi-choice') {
-            return view('answer_question_types.multi_test_question', compact('question', 'answers'));
-        } else if ($question[0]->type === 'trueFalse') {
-            return view('answer_question_types.trueFalse_test_question', compact('question', 'answers'));
-        } else if ($question[0]->type === 'listening') {
-            return view('answer_question_types.listening_test_question', compact('question', 'answers'));
-        } else if ($question[0]->type === 'reading') {
-            return view('answer_question_types.reading_test_question', compact('question', 'answers'));
+            return $randomQuestionId;
         }
-    }
+
+    protected function getAnswers($questionId) {
+            $answers = Answer::where('question_id', $questionId)->first();
+            return $answers;
+        }
+
+    protected function getCategories($questionId) {
+            $categories = Category::find($questionId);
+            return $categories;
+        }
+
+    public function displayQuestion()
+        {
+            $questionId = $this->getRandomQuestionId();
+            //get full question data with answers and categories based on QuestionId;
+
+            $question = Question::where('id', $questionId)->first();
+            $answers = $this->getAnswers($questionId);
+            $categories = $this->getCategories($questionId);
+
+            //return correct views
+            if ($question->type === 'multi-choice') {
+                return view('answer_question_types.multi_test_question', compact('question', 'answers'));
+            } else if ($question->type === 'trueFalse') {
+                return view('answer_question_types.trueFalse_test_question', compact('question', 'answers'));
+            } else if ($question->type === 'listening') {
+                return view('answer_question_types.listening_test_question', compact('question', 'answers'));
+            } else if ($question->type === 'reading') {
+                return view('answer_question_types.reading_test_question', compact('question', 'answers'));
+            }
+        }
 
     public function store(Request $request)
-    {
-        Log::info('I am in the RESULT store method');
-        //submitted answer
-        $data = $request->all();
-        Log::info('got all data from request');
-        $userId = auth()->user()->id;
-        //define success correct answer defualt false (incorrect); it is used for Results only;
-        $successAnswer = 0;
-        //get the question ID to retrive correct answer;
-        $questionId = $data['question_id'];
-        Log::info('got the questiuon ID and below are the answers');
-        //Get the correct answer from db
-        $answer = Answer::get()->where('id', $questionId)->first();
-        Log::debug($answer);
-        //get the row of Statistics for the user who is doing the test
-        $statsUpdate = Statistics::find($userId);
+        {
+            $data = $request->all();
+            $userId = auth()->user()->id;
+            //define success correct answer defualt false (incorrect); it is used for Results only;
+            $successAnswer = 0;
+            //get the question ID to retrive correct answer;
+            $questionId = $data['question_id'];
+            $questionLevel = Question::where('id', $questionId)->get('level')[0]->level;
+            $answer = Answer::get()->where('id', $questionId)->first();
+            //get the row of Statistics for the user who is doing the test
+            $statsUpdate = Statistics::find($userId);
 
-        //check if answer is correct and update/increment the result table and the statistics table;
-        if ($answer->correct == $data['user_answer']) {
-            $successAnswer = 1;
-            $statsUpdate->increment('general_correct');
+            //check if answer is correct and update/increment the result table and the statistics table;
+            if ($answer->correct == $data['user_answer']) {
+                $successAnswer = 1;
+                $statsUpdate->increment('general_correct');
 
-        } else {
-            $statsUpdate->increment('general_incorrect');
-        };
+            } else {
+                $statsUpdate->increment('general_incorrect');
+            };
 
-        //add the results to the db 
-        Result::create([
-            'user_id' => $userId,
-            'question_id' => $data['question_id'],
-            'user_answer' => $data['user_answer'],
-            'correct' => $successAnswer,
-        ]);
-        
-        if ($userId === 1) {
-            return redirect(route('admin.dashboard')); //change to results view later
-        } else {
-            return redirect(route('user.dashboard'));
+            //add the results to the db 
+            Result::create([
+                'user_id' => $userId,
+                'question_id' => $data['question_id'],
+                'user_answer' => $data['user_answer'],
+                'correct' => $successAnswer,
+                'level' => $questionLevel,
+            ]);
+            
+            if ($userId === 1) {
+                return redirect(route('admin.dashboard')); //change to results view later
+            } else {
+                return redirect(route('user.dashboard'));
+            }
         }
-    }
 }

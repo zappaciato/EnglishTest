@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('question_id');
             $table->string('user_answer');
             $table->integer('correct');
+            $table->string('level');
 
             $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

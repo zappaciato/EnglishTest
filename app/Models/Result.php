@@ -14,6 +14,7 @@ class Result extends Model
         'user_id',
         'user_answer',
         'correct',
+        'level',
     ];
 
     public function questions()

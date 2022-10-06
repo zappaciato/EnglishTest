@@ -1,1 +1,1 @@
-<h4 class="text-primary py-3">{{$question[0]->instruction}}</h4>
+<h4 class="text-primary py-3">{{$question->instruction}}</h4>
