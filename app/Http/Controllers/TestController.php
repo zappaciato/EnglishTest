@@ -17,22 +17,37 @@ class TestController extends Controller
     #show a random question TODO: and filter through those which are done by this user
     public function randomQuestion()
     {
-        Log::info('I am in random question in Test Controller');
+        // $userId = auth()->user()->id;
+        // $question = [];
+        do {
+            Log::info('initializing do-while loop');
+            //get random questions only ids limited to 3 per draw output array of obj [];
+            $randomQuestionsIds = Question::all('id')->random(3);
 
-        //get a random question and collect all the data for the random question;
-        $question = Question::inRandomOrder()->firstOrFail();
-        $questionId = $question->id;
+            //get all questions answered by user (it can be slow..) output array of obj[];
+            $allAnsweredQuestionsIds = Result::where('user_id', auth()->user()->id)->get(['question_id AS id']);
+            //compare the arrays with method diff(); 
+
+            $difference = $randomQuestionsIds->diff($allAnsweredQuestionsIds); //it lists only the difference
+            //return the question which hasn't been answered
+
+            $question = Question::findOrFail($difference->random(1));
+
+        } while(count($difference) === 0);
+
+        //get the question id to find matched answers and categories;
+        $questionId = $question[0]->id;
         $answers = Answer::find($questionId);
         $categories = Category::find($questionId);
 
         //redirect to the view related to the randomly picked question;
-        if ($question->type === 'multi-choice') {
+        if ($question[0]->type === 'multi-choice') {
             return view('answer_question_types.multi_test_question', compact('question', 'answers'));
-        } else if ($question->type === 'trueFalse') {
+        } else if ($question[0]->type === 'trueFalse') {
             return view('answer_question_types.trueFalse_test_question', compact('question', 'answers'));
-        } else if ($question->type === 'listening') {
+        } else if ($question[0]->type === 'listening') {
             return view('answer_question_types.listening_test_question', compact('question', 'answers'));
-        } else if ($question->type === 'reading') {
+        } else if ($question[0]->type === 'reading') {
             return view('answer_question_types.reading_test_question', compact('question', 'answers'));
         }
     }
