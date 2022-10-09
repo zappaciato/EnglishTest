@@ -31,7 +31,9 @@ class AdminController extends Controller
         $results = Result::get();
 
         //get user with most correct answers
+        
         $stats = Statistics::orderBy('general_correct', 'desc')->first();
+
 
         return view('admin.admin_dashboard', compact('users', 'questions', 'results', 'stats'));
     }

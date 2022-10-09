@@ -18,6 +18,12 @@ class Statistics extends Model
         'cat_tenses_incorrect',
         'cat_grammar_correct',
         'cat_grammar_incorrect',
+        'cat_vocabulary_correct',
+        'cat_vocabulary_incorrect',
+        'cat_business_correct',
+        'cat_business_incorrect',
+        'cat_present_simple_correct',
+        'cat_present_simple_incorrect',
 
     ];
 

@@ -30,7 +30,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/user-dashboard', [UserController::class, 'index'])->name('user.dashboard');
 
-Route::get('/test-question', [TestController::class, 'randomQuestion'])->name('test.question');
+Route::get('/test-question', [TestController::class, 'displayQuestion'])->name('test.question');
 Route::post('/test-question', [TestController::class, 'store']);
 
 

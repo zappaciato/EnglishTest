@@ -32,7 +32,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -95,6 +95,12 @@ class RegisterController extends Controller
             'cat_tenses_incorrect' => 0,
             'cat_grammar_correct' => 0,
             'cat_grammar_incorrect' => 0,
+            'cat_vocabulary_correct' => 0,
+            'cat_vocabulary_incorrect' => 0,
+            'cat_business_correct' => 0,
+            'cat_business_incorrect' => 0,
+            'cat_present_simple_correct' => 0,
+            'cat_present_simple_incorrect' => 0,
 
         ]);
 
