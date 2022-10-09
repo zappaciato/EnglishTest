@@ -1,43 +1,71 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="container row justify-content-center">
-        <div class="col-md-12">
-            <div class="card container">
-      {{-- Here goes auth() for admin user or any other user --}}
-                <div class="container-fluid card-header d-flex justify-content-start"> 
-                    {{-- <h3>{{ __('Admin Dashboard') }}</h3> --}}
-                    <h3><a class="text-decoration-none text-underline-hover p-2 text-primary h5" href=" {{route('questions.list')}}">{{ __('View Questions') }}</a></h3>
-                    <h3><a class="text-decoration-none p-2 text-primary h5" href=" {{route('add.question')}}">{{ __('Add Questions') }}</a></h3>
-                    <h3><a class="text-decoration-none p-2 text-primary h5" href=" {{route('test.question')}}">{{ __('Test Your English') }}</a></h3>
-                    
+
+    <div class="container p-2">
+        <div class="container card-header p-2"> 
+            <div class="row overflow-hidden">
+                <div class="col-2 col-style">
+                    <button class="btn btn-success btn-lg">
+                        <a class="text-decoration-none p-2 text-white" href=" {{route('questions.list')}}">{{ __('View Questions') }}</a>
+                    </button>
                 </div>
-                <div class="row justify-content-evenly p-5">
-                    <div class="col-sm border p-5 d-flex flex-column align-items-center justify-content-center" >
-                        <h5 style="font-size: 0.9rem">{{ __('Users registered:') }}</h5>
-                        <h3 style="font-size: 1.8rem">{{count($users)}}</h3>
-                        
+                <div class="col-2 col-style">
+                    <button class="btn btn-warning btn-lg">
+                        <a class="text-decoration-none p-2 text-white" href=" {{route('add.question')}}">{{ __('Add Questions') }}</a>
+                    </button>
+                </div>
+                <div class="col-2 col-style">
+                    <button class="btn btn-primary btn-lg">
+                    <a class="text-decoration-none p-2 text-white" href=" {{route('test.question')}}">{{ __('Test Yourself') }}</a>
+                </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="container card p-5">
+        
+            <div class="container overflow-hidden p-3">
+                <div class="row gy-3">
+
+                    <div class="col-6 col-style">
+                        <div class="p-3 border bg-light">
+                            <h5 style="font-size: 0.9rem">{{ __('Users registered:') }}</h5>
+                            <h3>{{count($users)}}</h3>
+                        </div>
                     </div>
-                    <div class="col-sm border p-5 justify-content-center d-flex flex-column align-items-center" >    
-                        <h5 style="font-size: 0.8rem">{{ __('Number of questions:') }}</h5>
-                        <h3 style="font-size: 1.8rem">{{count($questions)}}</h3>
+                    <div class="col-6 col-style">
+                        <div class="p-3 border bg-light">
+                            <h5 style="font-size: 0.8rem">{{ __('Number of questions:') }}</h5>
+                            <h3>{{count($questions)}}</h3>
+                        </div>
                     </div>
-                    <div class="col-sm border p-5 justify-content-center d-flex flex-column align-items-center" >
-                        <h5 style="font-size: 0.8rem">{{ __('All answered questions:') }}</h5>
-                        <h3 style="font-size: 1.8rem">{{count($results)}}</h3>
+                    <div class="col-6 col-style">
+                        <div class="p-3 border bg-light">
+                            <h5 style="font-size: 0.8rem">{{ __('All answered questions:') }}</h5>
+                            <h3>{{count($results)}}</h3>
+                        </div>
                     </div>
-                    <div class="col-sm border p-5 justify-content-center d-flex flex-column align-items-center" >
-                        <h5 style="font-size: 0.6rem">{{ __('Best User:') }}</h5>
-                        <h3 style="font-size: 1.8rem">{{$stats->name}}</h3>
+                    <div class="col-6 col-style">
+                        <div class="p-3 border bg-light">
+                            <h5 style="font-size: 0.8rem">{{ __('Best User:') }} </h5>
+                            <h3>{{$stats->name}}</h3>
+                        </div>
                     </div>
-                    <div class="col-sm border p-5 justify-content-center d-flex flex-column align-items-center" >
-                        <h5 style="font-size: 0.6rem">{{ __('Best User Correct Answers:') }}</h5>
-                        <h3 style="font-size: 1.8rem">{{$stats->general_correct}}</h3>
+                    <div class="col-6 col-style">
+                        <div class="p-3 border bg-light">
+                            <h5 style="font-size: 0.8rem">{{ __('Best User Correct Answers Total:') }} </h5>
+                            <h3>{{$stats->general_correct}}</h3>
+                        </div>
+                    </div>
+                    <div class="col-6 col-style">
+                        <div class="p-3 border bg-light">
+                            <h5 style="font-size: 0.8rem">{{ __('Best User Correct Answers Total:') }} </h5>
+                            <h3>{{$stats->general_correct}}</h3>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection

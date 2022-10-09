@@ -46,6 +46,7 @@ Route::get('/question-list', [QuestionController::class, 'index'])->name('questi
 
 
 Route::get('/admin-dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+Route::get('/admin-stats' , [UserController::class, 'index'])->name('admin.stats');
 
 Route::get('/add-question', [AdminController::class, 'create'])->name('add.question');
 Route::get('/add-multi-question', [CreateQuestionController::class, 'createMultipleChoice'])->name('create.question.multi');

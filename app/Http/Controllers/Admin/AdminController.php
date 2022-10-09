@@ -27,7 +27,7 @@ class AdminController extends Controller
     {
         //get all the data needed for dispplaying on Admin Dashboard;
         $users = User::get();
-        $questions = Question::get();
+        $questions = Question::all();
         $results = Result::get();
 
         //get user with most correct answers

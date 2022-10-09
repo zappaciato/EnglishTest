@@ -16,6 +16,19 @@
 /* todo: create fadeout effect */
 }
 
+
+.col-style {
+    
+}
+
+.col-style:hover {
+    transform: scale(1.02);
+
+
+}
+
+/* alerts styles */
+
 .alert-danger {
     margin-top: 40px;
     margin-left: 50%;
