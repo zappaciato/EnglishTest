@@ -29,7 +29,7 @@ class AnswerFactory extends Factory
                 'answer_c',
                 'answer_d',
             ]),
-            'question_id' => $this->faker->unique()->numberBetween(1,30),
+            'question_id' => $this->faker->unique()->numberBetween(1,8),
         ];
     }
 }

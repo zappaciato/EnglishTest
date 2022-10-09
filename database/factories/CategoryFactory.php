@@ -22,9 +22,9 @@ class CategoryFactory extends Factory
             'grammar' => $this->faker->numberBetween(0,1),
             'tenses' => $this->faker->numberBetween(0, 1),
             'present_simple' => $this->faker->numberBetween(0, 1),
-            'vocabulary' => $this->faker->numberBetween(0, 1),
+            'vocabulary' => 0, //need one category true at least
             'business' => $this->faker->numberBetween(0, 1),
-            'question_id' => $this->faker->unique()->numberBetween(1,30),
+            'question_id' => $this->faker->unique()->numberBetween(1,8),
         ];
     }
 }

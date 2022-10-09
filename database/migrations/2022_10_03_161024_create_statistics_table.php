@@ -23,6 +23,12 @@ return new class extends Migration
             $table->integer('cat_tenses_incorrect');
             $table->integer('cat_grammar_correct');
             $table->integer('cat_grammar_incorrect');
+            $table->integer('cat_vocabulary_correct');
+            $table->integer('cat_vocabulary_incorrect');
+            $table->integer('cat_business_correct');
+            $table->integer('cat_business_incorrect');
+            $table->integer('cat_present_simple_correct');
+            $table->integer('cat_present_simple_incorrect');
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             

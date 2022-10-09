@@ -17,6 +17,16 @@
 
 @endif
 
+@if(session('warningMessage'))
+
+<div class="message alert alert-danger">
+  <h3>{{session('warningMessage')}}</h3>
+  <a class="close">&times;</a>
+</div>
+
+@endif
+
+
 
 
 {{-- @if(session('verified'))
