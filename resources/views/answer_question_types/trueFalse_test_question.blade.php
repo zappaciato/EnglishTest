@@ -17,7 +17,7 @@
         @include('partials.question_block.truefalse_answers')
 
         <div>
-            <input class="btn btn-secondary mt-5" type="submit" value="submit">
+            <input class="btn btn-secondary mt-5" type="submit" value="Next"/>
         </div>
 
     </div>
@@ -31,3 +31,4 @@
 </div>
 </form>
 @endsection
+

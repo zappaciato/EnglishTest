@@ -141,11 +141,13 @@ class TestController extends Controller
                 'correct' => $successAnswer,
                 'level' => $questionLevel,
             ]);
-            
-            if ($userId == 1) {
-                return redirect(route('admin.dashboard')); //change to results view later
-            } else {
-                return redirect(route('user.dashboard'));
-            }
+
+        // if ($userId == 1) {
+        //     return redirect(route('test.question')); //change to results view later
+        // } else {
+        //     return redirect(route('test.question'));
+        // }
+        return redirect(route('test.question'));
+        
         }
 }

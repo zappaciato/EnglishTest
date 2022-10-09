@@ -40,22 +40,34 @@ class UserController extends Controller
     protected function calculateStats($userId) {
 
             $allStats = Statistics::where('user_id', $userId)->first();
+Log::debug($allStats);
 
+        if($allStats->general_correct + $allStats->general_incorrect) {
             //calculate tenses category
-            $tensesRatio = ($allStats->cat_tenses_correct / ($allStats->cat_tenses_correct + $allStats->cat_tenses_incorrect))* 100;
+            // $tensesRatio = ($allStats->cat_tenses_correct / ($allStats->cat_tenses_correct + $allStats->cat_tenses_incorrect))* 100;
+            $tensesRatio = ($allStats->cat_tenses_correct + $allStats->cat_tenses_incorrect) !== 0 ? ($allStats->cat_tenses_correct / ($allStats->cat_tenses_correct + $allStats->cat_tenses_incorrect)) * 100 : 0;
             //calculate grammar category
-            $grammarRatio = ($allStats->cat_grammar_correct / ($allStats->cat_grammar_correct + $allStats->cat_grammar_incorrect)) * 100;
+            // $grammarRatio = ($allStats->cat_grammar_correct / ($allStats->cat_grammar_correct + $allStats->cat_grammar_incorrect)) * 100;
+            $grammarRatio = ($allStats->cat_grammar_correct + $allStats->cat_grammar_incorrect) !== 0 ? ($allStats->cat_grammar_correct / ($allStats->cat_grammar_correct + $allStats->cat_grammar_incorrect)) * 100 : 0;
             //calculate present Simple category
-            $present_simpleRatio = ($allStats->cat_present_simple_correct / ($allStats->cat_present_simple_correct + $allStats->cat_present_simple_incorrect)) * 100;
+            // $present_simpleRatio = ($allStats->cat_present_simple_correct / ($allStats->cat_present_simple_correct + $allStats->cat_present_simple_incorrect)) * 100;
+            $present_simpleRatio = ($allStats->cat_present_simple_correct + $allStats->cat_present_simple_incorrect) !== 0 ? ($allStats->cat_present_simple_correct / ($allStats->cat_present_simple_correct + $allStats->cat_present_simple_incorrect)) * 100 : 0;
             //caluclate vocabulary category
-            $vocabularyRatio = ($allStats->cat_vocabulary_correct / ($allStats->cat_vocabulary_correct + $allStats->cat_vocabulary_incorrect)) * 100;
+            // $vocabularyRatio = ($allStats->cat_vocabulary_correct / ($allStats->cat_vocabulary_correct + $allStats->cat_vocabulary_incorrect)) * 100;
+            $vocabularyRatio = ($allStats->cat_vocabulary_correct + $allStats->cat_vocabulary_incorrect) !== 0 ? ($allStats->cat_vocabulary_correct / ($allStats->cat_vocabulary_correct + $allStats->cat_vocabulary_incorrect)) * 100 : 0;
             //calculate vocabulary Business
-            $vocabulary_businessRatio = ($allStats->cat_business_correct / ($allStats->cat_business_correct + $allStats->cat_business_incorrect)) * 100;
-            
+            $vocabularyRatio = ($allStats->cat_vocabulary_correct + $allStats->cat_vocabulary_incorrect) !== 0 ? ($allStats->cat_vocabulary_correct / ($allStats->cat_vocabulary_correct + $allStats->cat_vocabulary_incorrect)) * 100 : 0;
+            //calculate business vocabulary
+            // $vocabulary_businessRatio = ($allStats->cat_business_correct / ($allStats->cat_business_correct + $allStats->cat_business_incorrect)) * 100;
+            $vocabulary_businessRatio = ($allStats->cat_business_correct + $allStats->cat_business_incorrect) !== 0 ? ($allStats->cat_business_correct / ($allStats->cat_business_correct + $allStats->cat_business_incorrect)) * 100 : 0;
+
             $allCategoriesResults = ['Tenses' => $tensesRatio, 'Grammar' => $grammarRatio, 'Present Simple' => $present_simpleRatio, 'Vocabulary' => $vocabularyRatio, 'Business' => $vocabulary_businessRatio];
 
             return  $allCategoriesResults;
-
+        } else {
+            
+            return $allCategoriesResults = null;
+        }
 
     }
 

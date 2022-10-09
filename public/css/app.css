@@ -16,15 +16,20 @@
 /* todo: create fadeout effect */
 }
 
-
-.col-style {
-    
+.red {
+    background-color: red;
 }
 
 .col-style:hover {
     transform: scale(1.02);
+}
 
-
+/* change the size of the tooltip:: doesn't work */
+.tooltip-inner {
+    width: 350px !important;
+    width: inherit !important;
+    /* If max-width does not work, try using width instead */
+    /* width: 350px;  */
 }
 
 /* alerts styles */
